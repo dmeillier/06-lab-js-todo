@@ -1,0 +1,35 @@
+body{
+    background: linear-gradient(270deg, rgba(102, 209, 255, 0.25) 0%, rgba(204, 41, 240, 0.50) 100%);
+    margin: 0;
+  }
+  
+  header{
+    display: flex;
+    background-image: url(./medias/header.png);
+    background-size: cover;
+    height: 204px;
+    align-items: center;
+    justify-content: center;
+  }
+  .search{
+    display: grid;
+    width: 815px;
+    height: 62px;
+    grid: 69px/ 775px 59px;
+   }
+  input{
+    
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 0;
+  
+  }
+  
+  .search_button{
+    background-color: #fff;
+    background-image: url(./medias/ajout.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    border: 0;
+    }
