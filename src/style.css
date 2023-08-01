@@ -46,15 +46,15 @@ input{
     position: absolute;
     opacity: 0;
     cursor: pointer;
-    height: 0;
-    width: 0;
+    height: 35px;
+    width: 35px;
   }
   
   .toggle-slot {
     font-size: 10px;
     position: relative;
     height: 3.5em;
-    width: 7em;
+    width: 70px;
     border: 0px solid transparent;
     border-radius: 10em;
     background-color: white;
@@ -84,15 +84,15 @@ input{
   
   .sun-icon {
     position: absolute;
-    height: 6em;
-    width: 6em;
+    height: 35px;
+    width: 35px;
     color: #ffbb52;
   }
   
   .sun-icon-wrapper {
     position: absolute;
-    height: 6em;
-    width: 6em;
+    height: 35px;
+    width: 35px;
     opacity: 1;
     transform: translate(2em, 2em) rotate(15deg);
     transform-origin: 50% 50%;
@@ -106,11 +106,10 @@ input{
   
   .moon-icon {
     position: absolute;
-    height: 6em;
-    width: 6em;
+    height: 35px;
+    width: 35px;
     color: white;
   }
-     
   .toggle-checkbox:checked ~ .toggle-slot .moon-icon-wrapper {
     opacity: 1;
     transform: translate(2em, 2em) rotate(-15deg);
@@ -171,25 +170,29 @@ main {
   font-weight: 700;
 }
 /* ..................    checkbox ............. */
-.pair, .impair {
- margin-bottom: 45px;
-  --check: #cc29f0;
+.checklist.pair, .checklist.impair {
+  margin-bottom: 45px;
   width: 623px;
   height: 31px;
   border-radius: 20px;
   padding: 26px 30px 28px 30px;
-    position: relative;
-    box-shadow: 0 10px 30px rgba(65, 72, 86, 0.05);
-    display: grid;
-    grid-template-columns: 10px 1fr 30px;
-    align-items: center;
-    justify-content: center;
+  position: relative;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  display: grid;
+  grid-template-columns: 10px 1fr 30px;
+  align-items: center;
+  justify-content: center;
    
   }
-  .pair, .pair input {
-    background: #FF7AE7;
+  .pair{
+    background-color: rgba(255, 122, 231, 0.50);
   }
-  
+  .pair.input {
+    background-color: rgba(255, 122, 231, 0.10);
+  }
+  .impair, impair input{
+    background-color: #fff;
+  }
   
   .pair label, .impair label {
     color: #000;
@@ -209,16 +212,16 @@ main {
     position: absolute;
   }
   
-  .checklist label::before {
+  .pair label::before, .impair label::before {
     height: 2px;
     width: 8px;
     left: -57px;
-    background: var(--check);
+    background: #cc29f0;
     border-radius: 2px;
     transition: background 0.3s ease;
   }
   
-  .checklist label::after {
+  .pair label::after, .impair label::after {
     height: 4px;
     width: 4px;
     top: 8px;
@@ -227,7 +230,7 @@ main {
 
   }
   
-  .checklist input {
+  .pair input, .impair input {
     -webkit-appearance: none;
     -moz-appearance: none;
     position: relative;
@@ -242,47 +245,47 @@ main {
     margin-right: 20px;
    }
   
-  .checklist input::before, .checklist input::after {
+   .pair input::before, .impair input::before, .pair input::after, .impair input::after {
     content: "";
     position: absolute;
     height: 2px;
     top: auto;
-    background: var(--check);
+    background: #cc29f0;
     border-radius: 2px;
   }
   
-  .checklist input::before {
+  .pair input::before,.impair input::before {
     width: 0px;
     right: 60%;
     transform-origin: right bottom;
   }
   
-  .checklist input::after {
+  .pair input::after, .impair input::after {
     width: 0px;
     left: 40%;
     transform-origin: left bottom;
   }
   
   
-  .checklist input:checked::before {
+  .pair input:checked::before, .impair input:checked::before {
     animation: check-01 0.4s ease forwards;
   }
   
-  .checklist input:checked::after {
+  .pair input:checked::after, .impair input:checked::after {
     animation: check-02 0.4s ease forwards;
   }
   
-  .checklist input:checked + label {
+  .pair input:checked + label, .impair input:checked + label {
     color: #000;
     animation: move 0.3s ease 0.1s forwards;
   }
   
-  .checklist input:checked + label::before {
+  .pair input:checked + label::before, .impair input:checked + label::before {
     background: #000;
     animation: slice 0.4s ease forwards;
   }
   
-  .checklist input:checked + label::after {
+  .pair input:checked + label::after, .impair input:checked + label::after {
     animation: firework 0.5s ease forwards 0.1s;
   }
   
@@ -379,11 +382,16 @@ main {
   }
 
 .corbeille{
+  background-color: rgba(255, 122, 231, 0);
   background-image: url(./medias/corbeille.png);
   background-repeat: no-repeat;
   background-size: 20px;
   height: 20px;
   justify-content: end;
+  border: none;
+}
+.impair button.corbeille {
+  background-color: #fff;
 }
 
 /* ..................    fin de checkbox ............. */
@@ -393,44 +401,94 @@ main {
   background: linear-gradient(180deg, rgba(204, 41, 240, 0.05) 0%, rgba(204, 41, 240, 0.20) 100%), linear-gradient(180deg, #000 7.10%, #4A384E 100%);
 }
  .night #app {
-    background-color: #000;
+    background-color: #1d1b1b;
   }
   .night .radio-inputs{
     background-color: #fff;
   }
-  .night .checklist label::before{
+  .night .pair label::before, .night .impair label::before{
     background: #fff;
   }
-  .night .checklist input::before, 
-  .night .checklist input::after {
+  .night .pair input::before, 
+  .night .pair input::after, .night .impair input::before, 
+  .night .impair input::after {
     background: #fff;
   }
-  .night .checklist label{
+  .night .checklist.impair{
+    background: #2C265D
+  }
+  .night .pair label, .night .impair label{
     color: #fff
   }
-  .night .checklist input:checked + label {
+  .night .pair input:checked + label, .night .impair input:checked + label {
     color: #fff;
   }
-  .night .checklist input:checked + label::before {
+  .night .pair input:checked + label::before, .night .impair input:checked + label::before {
     background: #fff;
   }
   .night .corbeille{
     background-image: url(./medias/corbeille1.png);
-    height: 30px;
-    background-size: 30px;
+    height: 20px;
+    background-size: 20px;
+  }
+  .night .impair button.corbeille{
+    background-color: #2C265D;
   }
 }
 
 @media screen and (max-width: 375px){
-  header{
+  header, header.night{
     height: 100px;
+    padding-left: 20px;
   }
-  .search{
-   grid: 39px/ 30px 200px 64px;
-    margin: 0 auto;
+  .search {
+    grid: 39px/ 30px 180px 46px;
+    margin: 0 30px 0 20px;
+    
+  }
+  button.search_button{
+    background-size: 38px;
+    
   }
   #app{
+    width: 370px;
+    padding : 40px 0;
+    background: transparent;
+  }
+  .night #app{
     background: transparent;
   }
   
+  .checklist.pair, .checklist.impair {
+    width: 312px;
+  }
+  .radio-inputs {
+    margin-top: 32px;
+    width: 370px;
+  }
+  .toggle-slot {
+    width: 35px;
+  }
+  .toggle-checkbox:checked ~ .toggle-slot .toggle-button {
+   transform: translate(2.5px, 2.5px) rotate(0deg);
+  }
+  .sun-icon-wrapper {
+    transform: translate(0, 0) rotate(0deg);
+    }
+    .toggle-checkbox:checked ~ .toggle-slot .moon-icon-wrapper {
+      opacity: 1;
+      transform: translate(0, 0) rotate(0deg);
+      width: 35px;
+      height: 35px;
+    }
+    .toggle-checkbox {
+      left: 330px;
+      top: 30px;
+    }
+    .radio-inputs {
+      margin-bottom: 34px;
+    }
+    .checklist.pair, .checklist.impair {
+      margin-bottom: 33px;
+    }
 }

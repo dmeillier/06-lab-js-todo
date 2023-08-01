@@ -3,6 +3,9 @@ const header = document.querySelector("header");
 const main = document.querySelector("main");
 
 // Créez les éléments HTML en JavaScript
+
+const toggleButton = document.createElement("div");
+toggleButton.classList.add("toggle-button");
 const label = document.createElement("label");
 const toggleCheckbox = document.createElement("input");
 toggleCheckbox.setAttribute("type", "checkbox");
@@ -19,8 +22,7 @@ sunIcon.classList.add("iconify", "sun-icon");
 sunIcon.setAttribute("data-icon", "feather-sun");
 sunIcon.setAttribute("data-inline", "false");
 
-const toggleButton = document.createElement("div");
-toggleButton.classList.add("toggle-button");
+
 
 const moonIconWrapper = document.createElement("div");
 moonIconWrapper.classList.add("moon-icon-wrapper");
