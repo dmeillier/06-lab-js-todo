@@ -20,6 +20,7 @@ for (let i = 0; i < options.length; i++) {
     const radio = document.createElement("input");
     radio.type = "radio";
     radio.name = "radio";
+    radio.value = options[i];
     if (i === 0) {
         radio.checked = true; // Assurez-vous qu'un seul bouton radio est coché au départ
     }
