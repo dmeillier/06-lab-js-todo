@@ -4,10 +4,10 @@ document.addEventListener("DOMContentLoaded", () => {
   function createChecklist(labelText) {
     const checklist = document.createElement("div");
     checklist.classList.add("checklist");
+    checklist.draggable = true;
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    checkbox.name = "r";
     checkbox.value = "1";
 
     const label = document.createElement("label");

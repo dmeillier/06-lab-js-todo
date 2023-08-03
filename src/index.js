@@ -91,5 +91,44 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  const checklist = document.querySelectorAll(".checklist")
-  console.log(checklist);
+  document.addEventListener("DOMContentLoaded", () => {
+    const checklists = document.querySelectorAll(".checklist");
+  
+    checklists.forEach(checklist => {
+      checklist.ondragstart = startDrag;
+    });
+  
+    const containers = document.querySelectorAll(".container");
+    containers.forEach(container => {
+      container.ondragover = allowDrop;
+      container.ondrop = handleDrop;
+    });
+  
+    let draggedElement = null;
+  
+    function startDrag(e) {
+      draggedElement = e.target.closest('.checklist');
+      e.dataTransfer.setData('text/plain', ''); // Nécessaire pour Firefox
+    }
+  
+    function allowDrop(e) {
+      e.preventDefault();
+    }
+  
+    function handleDrop(e) {
+      e.preventDefault();
+      if (draggedElement) {
+        const dropTarget = e.target.closest('.checklist');
+        const container = dropTarget ? dropTarget.parentElement : e.target;
+        const dropTargetIndex = dropTarget ? Array.from(container.children).indexOf(dropTarget) : 0;
+        const draggedElementIndex = Array.from(container.children).indexOf(draggedElement);
+  
+        if (draggedElementIndex < dropTargetIndex) {
+          container.insertBefore(draggedElement, dropTarget.nextSibling);
+        } else {
+          container.insertBefore(draggedElement, dropTarget);
+        }
+        draggedElement = null;
+      }
+    }
+  });
