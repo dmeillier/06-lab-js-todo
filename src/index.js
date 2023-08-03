@@ -73,14 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
       return checklist;
     }
-  
-    // Créer et ajouter dynamiquement les checklists
-    const contenuChecklists = ["Checklist 1", "Checklist 2", "Checklist 3"];
-    contenuChecklists.forEach((contenu, index) => {
-      const checklist = createChecklist(contenu, index);
-      app.appendChild(checklist);
-    });
-  
+     
     // Display all the checklists at the loading of the page
     displayChecklists(options[0]);
    
