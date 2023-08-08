@@ -1,6 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
   const input = document.querySelector("input.search_input");
 
+  // Template pour la checklist
+const checklistTemplate = (labelText) => `
+<div class="checklist" draggable="true">
+  <input type="checkbox" value="1">
+  <label>${labelText}</label>
+  <button class="corbeille"></button>
+</div>
+`;
+
   function createChecklist(labelText) {
     const checklist = document.createElement("div");
     checklist.classList.add("checklist");
@@ -63,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function addChecklist(labelText) {
+    function addChecklist(labelText) {
     const checklist = createChecklist(labelText);
     const index = document.querySelectorAll(".checklist").length;
     if (index % 2 === 0) {
@@ -154,3 +163,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+

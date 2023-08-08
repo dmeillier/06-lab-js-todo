@@ -41,3 +41,12 @@ const customRadioHolder = document.getElementById("radioContainer");
 
 // Ajoutez "divradio" contenant les boutons radio au DOM
 app.prepend(divradio);
+
+const checklist = document.querySelectorAll(".checklist");
+
+  const deleteButton = document.createElement("button");
+  deleteButton.setAttribute("id", "delete");
+  deleteButton.innerText = "Supprimer les tâches terminées";
+  app.appendChild(deleteButton);
+
+  

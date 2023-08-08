@@ -145,7 +145,7 @@ main {
   height: 40px;
   font-size: 16px;
   line-height: 24px;
-  margin-bottom: 60px;
+  margin-bottom: 5px;
 }
 
 .radio-inputs .radio {
@@ -173,6 +173,10 @@ main {
   font-weight: 700;
 }
 /* ..................    checkbox ............. */
+.container{
+  margin-top: 55px;
+}
+
 .checklist.pair, .checklist.impair {
   cursor: grab;
   margin-bottom: 45px;
@@ -399,6 +403,14 @@ main {
   background-color: #fff;
 }
 
+button#delete{
+  border: 0;
+  background-color: #fff;
+  color: red;
+  margin-left: 300px;
+  display: none;
+}
+
 /* ..................    fin de checkbox ............. */
 
 @media (prefers-color-scheme : light) {
@@ -495,5 +507,8 @@ main {
     }
     .checklist.pair, .checklist.impair {
       margin-bottom: 33px;
+    }
+    button#delete{
+      margin-left: 200px;
     }
 }
