@@ -32,9 +32,19 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
           container.insertBefore(draggedElement, dropTarget);
         }
+        // Mettre à jour la classe de la checklist déplacée en fonction de sa nouvelle position
+    const newChecklists = container.querySelectorAll(".checklist");
+    newChecklists.forEach((checklist, index) => {
+      if (index % 2 === 0) {
+        checklist.classList.remove("impair");
+        checklist.classList.add("pair");
+      } else {
+        checklist.classList.remove("pair");
+        checklist.classList.add("impair");
+      }
+    });
         draggedElement = null;
        
       }
     }
-    
   });

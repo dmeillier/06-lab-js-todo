@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Template pour la checklist
 const checklistTemplate = (labelText) => `
 <div class="checklist" draggable="true">
-  <input type="checkbox" value="1">
+  <input type="checkbox">
   <label>${labelText}</label>
   <button class="corbeille"></button>
 </div>
@@ -17,8 +17,7 @@ const checklistTemplate = (labelText) => `
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    checkbox.value = "1";
-
+    
     const label = document.createElement("label");
     label.textContent = labelText;
 
