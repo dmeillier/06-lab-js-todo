@@ -14,7 +14,6 @@ input.setAttribute("class", "search_input");
 input.setAttribute("placeholder", "Rechercher");
 
 
-
 // Création de l'élément bouton
 let button = document.createElement("button");
 button.setAttribute("class", "search_button");
@@ -34,4 +33,20 @@ header.appendChild(div);
 button.addEventListener("click", () => {
   const event = new CustomEvent("customButtonClick");
   document.dispatchEvent(event);
+});
+
+// Écouter l'événement 'input' sur l'élément input
+input.addEventListener("input", () => {
+  const searchText = input.value.toLowerCase(); // Convertir en minuscules pour une recherche insensible à la casse
+  
+  // Parcourir toutes les checklists pour les filtrer
+  const checklists = document.querySelectorAll(".checklist");
+  checklists.forEach(checklist => {
+    const checklistText = checklist.textContent.toLowerCase();
+    if (checklistText.includes(searchText)) {
+      checklist.style.display = "grid"; // Afficher les checklists correspondantes
+    } else {
+      checklist.style.display = "none"; // Masquer les autres checklists
+    }
+  });
 });

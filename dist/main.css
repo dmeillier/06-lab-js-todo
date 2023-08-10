@@ -1,12 +1,13 @@
-/*!***********************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./src/style.css ***!
-  \***********************************************************************************************************/
-body{
-  background: linear-gradient(270deg, rgba(102, 209, 255, 0.25)0%, rgba(204, 41, 240, 0.50) 100%);
+/*!***************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/style.scss ***!
+  \***************************************************************************************************************************************************/
+body {
+  background: linear-gradient(270deg, rgba(102, 209, 255, 0.25) 0%, rgba(204, 41, 240, 0.5) 100%);
   margin: 0;
-  height: 100vh;
+  height: 100%;
 }
-header{
+
+header {
   padding-right: 62px;
   max-width: 100%;
   display: flex;
@@ -16,129 +17,142 @@ header{
   align-items: center;
   padding-left: 132px;
 }
-.box{
- background-image: url(assets/loupe.png);
- background-size: 30px;
- background-repeat: no-repeat;
- background-position: 100% 50%;
+
+.box {
+  background-image: url(assets/loupe.png);
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: 100% 50%;
 }
-.search{
+
+.search {
   background-color: #fff;
   display: grid;
-  grid: 69px/ 160px 600px 64px;
+  grid: 69px/160px 600px 64px;
   margin: 0 auto;
 }
-input{
+
+input {
   align-items: center;
   text-align: center;
   border: 0;
   font-size: 20px;
- }
+}
 
-.search_button{
+.search_button {
+  margin-top: 5px;
+  height: 60px;
+  border-radius: 40px;
   background-color: #fff;
   background-image: url(assets/ajout.png);
   background-size: 45px;
   background-repeat: no-repeat;
   background-position: center;
   border: 0;
-  }
+  transition: transform 2s;
+}
 
-  /* bouton jour / nuit */
-  .toggle-checkbox {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 35px;
-    width: 35px;
-  }
-  
-  .toggle-slot {
-    font-size: 10px;
-    position: relative;
-    height: 3.5em;
-    width: 70px;
-    border: 0px solid transparent;
-    border-radius: 10em;
-    background-color: white;
-    transition: background-color 250ms;
-  }
-  
-  .toggle-checkbox:checked ~ .toggle-slot {
-    background-color: #374151;
-  }
-  
-  .toggle-button {
-    transform: translate(0.3em, 0.25em);
-    position: absolute;
-    height: 3em;
-    width: 3em;
-    border-radius: 50%;
-    background-color: #ffeccf;
-    box-shadow: inset 0px 0px 0px 0.75em #ffbb52;
-    transition: background-color 250ms, border-color 250ms, transform 500ms cubic-bezier(.26,2,.46,.71);
-  }
-  
-  .toggle-checkbox:checked ~ .toggle-slot .toggle-button {
-    background-color: #485367;
-    box-shadow: inset 0px 0px 0px 0.75em white;
-    transform: translate(3.65em, 0.25em);
-  }
-  
-  .sun-icon {
-    position: absolute;
-    height: 35px;
-    width: 35px;
-    color: #ffbb52;
-  }
-  
-  .sun-icon-wrapper {
-    position: absolute;
-    height: 35px;
-    width: 35px;
-    opacity: 1;
-    transform: translate(2em, 2em) rotate(15deg);
-    transform-origin: 50% 50%;
-    transition: opacity 150ms, transform 500ms cubic-bezier(.26,2,.46,.71);
-  }
-  
-  .toggle-checkbox:checked ~ .toggle-slot .sun-icon-wrapper {
-    opacity: 0;
-    transform: translate(3em, 2em) rotate(0deg);
-  }
-  
-  .moon-icon {
-    position: absolute;
-    height: 35px;
-    width: 35px;
-    color: white;
-  }
-  .toggle-checkbox:checked ~ .toggle-slot .moon-icon-wrapper {
-    opacity: 1;
-    transform: translate(2em, 2em) rotate(-15deg);
-  }
-  /* ...................... fin bouton jour/nuit.............*/
+.search_button:hover {
+  transform: rotate(360deg);
+}
+
+/* bouton jour / nuit */
+.toggle-checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 35px;
+  width: 35px;
+}
+
+.toggle-slot {
+  font-size: 10px;
+  position: relative;
+  height: 3.5em;
+  width: 70px;
+  border: 0px solid transparent;
+  border-radius: 10em;
+  background-color: white;
+  transition: background-color 250ms;
+}
+
+.toggle-checkbox:checked ~ .toggle-slot {
+  background-color: #374151;
+}
+
+.toggle-button {
+  transform: translate(0.3em, 0.25em);
+  position: absolute;
+  height: 3em;
+  width: 3em;
+  border-radius: 50%;
+  background-color: #ffeccf;
+  box-shadow: inset 0px 0px 0px 0.75em #ffbb52;
+  transition: background-color 250ms, border-color 250ms, transform 500ms cubic-bezier(0.26, 2, 0.46, 0.71);
+}
+
+.toggle-checkbox:checked ~ .toggle-slot .toggle-button {
+  background-color: #485367;
+  box-shadow: inset 0px 0px 0px 0.75em white;
+  transform: translate(3.65em, 0.25em);
+}
+
+.sun-icon {
+  position: absolute;
+  height: 35px;
+  width: 35px;
+  color: #ffbb52;
+}
+
+.sun-icon-wrapper {
+  position: absolute;
+  height: 35px;
+  width: 35px;
+  opacity: 1;
+  transform: translate(2em, 2em) rotate(15deg);
+  transform-origin: 50% 50%;
+  transition: opacity 150ms, transform 500ms cubic-bezier(0.26, 2, 0.46, 0.71);
+}
+
+.toggle-checkbox:checked ~ .toggle-slot .sun-icon-wrapper {
+  opacity: 0;
+  transform: translate(3em, 2em) rotate(0deg);
+}
+
+.moon-icon {
+  position: absolute;
+  height: 35px;
+  width: 35px;
+  color: white;
+}
+
+.toggle-checkbox:checked ~ .toggle-slot .moon-icon-wrapper {
+  opacity: 1;
+  transform: translate(2em, 2em) rotate(-15deg);
+}
+
 main {
   display: flex;
   justify-content: center;
- }
-  #app{
+}
+
+#app {
   display: grid;
   margin-top: -50px;
   background-color: #fff;
   width: 822px;
-  padding : 40px 80px;
+  padding: 40px 80px;
   box-sizing: border-box;
   justify-items: center;
 }
 
 /*................. boutons radio ...........*/
 .radio-inputs {
-  position: relative;
   display: flex;
   justify-content: center;
+  position: relative;
   flex-wrap: wrap;
-  background-color: rgba(0, 209, 255, .25);
+  background-color: rgba(0, 209, 255, 0.25);
   box-sizing: border-box;
   box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
   width: 491px;
@@ -151,6 +165,11 @@ main {
 .radio-inputs .radio {
   flex: 1 1 auto;
   text-align: center;
+  transition: all 1s ease-out;
+}
+
+.radio:hover {
+  background-color: rgba(0, 209, 255, 0.5);
 }
 
 .radio-inputs .radio input {
@@ -159,21 +178,22 @@ main {
 
 .radio-inputs .radio .name {
   display: flex;
+  justify-content: center;
   cursor: pointer;
   align-items: flex-start;
-  justify-content: center;
   border: none;
-  padding: .5rem 0;
+  padding: 0.5rem 0;
   color: #000;
-  transition: all .15s ease-in-out;
+  transition: all 0.15s ease-in-out;
 }
 
 .radio-inputs .radio input:checked + .name {
   background-color: #00D1FF;
   font-weight: 700;
 }
+
 /* ..................    checkbox ............. */
-.container{
+.container {
   margin-top: 55px;
 }
 
@@ -190,207 +210,193 @@ main {
   grid-template-columns: 10px 1fr 30px;
   align-items: center;
   justify-content: center;
-   
+}
+
+.impair {
+  background-color: rgba(255, 122, 231, 0.5);
+}
+
+.impair.input {
+  background-color: rgba(255, 122, 231, 0.1);
+}
+
+.pair input {
+  background-color: #fff;
+}
+
+.pair label, .impair label {
+  color: #000;
+  font-size: 20px;
+  position: relative;
+  cursor: pointer;
+  display: grid;
+  align-items: center;
+  width: -moz-fit-content;
+  width: fit-content;
+  text-align: center;
+  transition: color 0.3s ease;
+  margin: 0 20px 0 50px;
+}
+
+.pair label::before, .impair label::before, .pair label::after, .impair label::after {
+  content: "";
+  position: absolute;
+}
+
+.pair label::before, .impair label::before {
+  height: 2px;
+  width: 8px;
+  left: -57px;
+  background: #cc29f0;
+  border-radius: 2px;
+  transition: background 0.3s ease;
+}
+
+.pair label::after, .impair label::after {
+  height: 4px;
+  width: 4px;
+  top: 8px;
+  left: -25px;
+  border-radius: 50%;
+}
+
+.pair input, .impair input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  position: relative;
+  height: 15px;
+  width: 15px;
+  outline: none;
+  border: 0;
+  margin: 0 15px 0 0;
+  cursor: pointer;
+  display: grid;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.pair input::before, .impair input::before, .pair input::after, .impair input::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  top: auto;
+  background: #cc29f0;
+  border-radius: 2px;
+}
+
+.pair input::before, .impair input::before {
+  width: 0px;
+  right: 60%;
+  transform-origin: right bottom;
+}
+
+.pair input::after, .impair input::after {
+  width: 0px;
+  left: 40%;
+  transform-origin: left bottom;
+}
+
+.pair input:checked::before, .impair input:checked::before {
+  animation: check-01 0.4s ease forwards;
+}
+
+.pair input:checked::after, .impair input:checked::after {
+  animation: check-02 0.4s ease forwards;
+}
+
+.pair input:checked + label, .impair input:checked + label {
+  color: #000;
+  animation: move 0.3s ease 0.1s forwards;
+}
+
+.pair input:checked + label::before, .impair input:checked + label::before {
+  background: #000;
+  animation: slice 0.4s ease forwards;
+}
+
+.pair input:checked + label::after, .impair input:checked + label::after {
+  animation: firework 0.5s ease forwards 0.1s;
+}
+
+@keyframes move {
+  50% {
+    padding-left: 8px;
+    padding-right: 0px;
   }
-  .impair{
-    background-color: rgba(255, 122, 231, 0.50);
+  100% {
+    padding-right: 4px;
   }
-  .impair.input {
-    background-color: rgba(255, 122, 231, 0.10);
+}
+@keyframes slice {
+  60% {
+    width: 100%;
+    left: 4px;
   }
-  .pair input{
-    background-color: #fff;
+  100% {
+    width: 100%;
+    left: -2px;
+    padding-left: 0;
   }
-  
-  .pair label, .impair label {
-    color: #000;
-    font-size: 20px;
-    position: relative;
-    cursor: pointer;
-    display: grid;
-    align-items: center;
-    width: -moz-fit-content;
-    width: fit-content;
-   text-align: center;
-    transition: color 0.3s ease;
-    margin:0 20px 0 50px;
-  }
-  
-  .pair label::before, .impair label::before, .pair label::after, .impair label::after {
-    content: "";
-    position: absolute;
-  }
-  
-  .pair label::before, .impair label::before {
-    height: 2px;
-    width: 8px;
-    left: -57px;
-    background: #cc29f0;
-    border-radius: 2px;
-    transition: background 0.3s ease;
-  }
-  
-  .pair label::after, .impair label::after {
-    height: 4px;
+}
+@keyframes check-01 {
+  0% {
     width: 4px;
-    top: 8px;
-    left: -25px;
-    border-radius: 50%;
-
-  }
-  
-  .pair input, .impair input {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    position: relative;
-    height: 15px;
-    width: 15px;
-    outline: none;
-    border: 0;
-    margin: 0 15px 0 0;
-    cursor: pointer;
-    display: grid;
-    align-items: center;
-    margin-right: 20px;
-   }
-  
-   .pair input::before, .impair input::before, .pair input::after, .impair input::after {
-    content: "";
-    position: absolute;
-    height: 2px;
     top: auto;
-    background: #cc29f0;
-    border-radius: 2px;
+    transform: rotate(0);
   }
-  
-  .pair input::before,.impair input::before {
+  50% {
     width: 0px;
-    right: 60%;
-    transform-origin: right bottom;
+    top: auto;
+    transform: rotate(0);
   }
-  
-  .pair input::after, .impair input::after {
+  51% {
     width: 0px;
-    left: 40%;
-    transform-origin: left bottom;
+    top: 8px;
+    transform: rotate(45deg);
   }
-  
-  
-  .pair input:checked::before, .impair input:checked::before {
-    animation: check-01 0.4s ease forwards;
+  100% {
+    width: 5px;
+    top: 8px;
+    transform: rotate(45deg);
   }
-  
-  .pair input:checked::after, .impair input:checked::after {
-    animation: check-02 0.4s ease forwards;
+}
+@keyframes check-02 {
+  0% {
+    width: 4px;
+    top: auto;
+    transform: rotate(0);
   }
-  
-  .pair input:checked + label, .impair input:checked + label {
-    color: #000;
-    animation: move 0.3s ease 0.1s forwards;
+  50% {
+    width: 0px;
+    top: auto;
+    transform: rotate(0);
   }
-  
-  .pair input:checked + label::before, .impair input:checked + label::before {
-    background: #000;
-    animation: slice 0.4s ease forwards;
+  51% {
+    width: 0px;
+    top: 8px;
+    transform: rotate(-45deg);
   }
-  
-  .pair input:checked + label::after, .impair input:checked + label::after {
-    animation: firework 0.5s ease forwards 0.1s;
+  100% {
+    width: 10px;
+    top: 8px;
+    transform: rotate(-45deg);
   }
-  
-  @keyframes move {
-    50% {
-      padding-left: 8px;
-      padding-right: 0px;
-    }
-  
-    100% {
-      padding-right: 4px;
-    }
+}
+@keyframes firework {
+  0% {
+    opacity: 1;
+    box-shadow: 0 0 0 -2px #4f29f0, 0 0 0 -2px #4f29f0, 0 0 0 -2px #4f29f0, 0 0 0 -2px #4f29f0, 0 0 0 -2px #4f29f0, 0 0 0 -2px #4f29f0;
   }
-  @keyframes slice {
-    60% {
-      width: 100%;
-      left: 4px;
-    }
-  
-    100% {
-      width: 100%;
-      left: -2px;
-      padding-left: 0;
-    }
+  30% {
+    opacity: 1;
   }
-  
-  
-  @keyframes check-01 {
-    0% {
-      width: 4px;
-      top: auto;
-      transform: rotate(0);
-    }
-  
-    50% {
-      width: 0px;
-      top: auto;
-      transform: rotate(0);
-    }
-  
-    51% {
-      width: 0px;
-      top: 8px;
-      transform: rotate(45deg);
-    }
-  
-    100% {
-      width: 5px;
-      top: 8px;
-      transform: rotate(45deg);
-    }
+  100% {
+    opacity: 0;
+    box-shadow: 0 -15px 0 0px #4f29f0, 14px -8px 0 0px #4f29f0, 14px 8px 0 0px #4f29f0, 0 15px 0 0px #4f29f0, -14px 8px 0 0px #4f29f0, -14px -8px 0 0px #4f29f0;
   }
-  
-  @keyframes check-02 {
-    0% {
-      width: 4px;
-      top: auto;
-      transform: rotate(0);
-    }
-  
-    50% {
-      width: 0px;
-      top: auto;
-      transform: rotate(0);
-    }
-  
-    51% {
-      width: 0px;
-      top: 8px;
-      transform: rotate(-45deg);
-    }
-  
-    100% {
-      width: 10px;
-      top: 8px;
-      transform: rotate(-45deg);
-    }
-  }
-  
-  @keyframes firework {
-    0% {
-      opacity: 1;
-      box-shadow: 0 0 0 -2px #4f29f0, 0 0 0 -2px #4f29f0, 0 0 0 -2px #4f29f0, 0 0 0 -2px #4f29f0, 0 0 0 -2px #4f29f0, 0 0 0 -2px #4f29f0;
-    }
-  
-    30% {
-      opacity: 1;
-    }
-  
-    100% {
-      opacity: 0;
-      box-shadow: 0 -15px 0 0px #4f29f0, 14px -8px 0 0px #4f29f0, 14px 8px 0 0px #4f29f0, 0 15px 0 0px #4f29f0, -14px 8px 0 0px #4f29f0, -14px -8px 0 0px #4f29f0;
-    }
-  }
-
-.corbeille{
+}
+.corbeille {
   background-color: rgba(255, 122, 231, 0);
   background-image: url(assets/corbeille.png);
   background-repeat: no-repeat;
@@ -399,11 +405,12 @@ main {
   justify-content: end;
   border: none;
 }
+
 .pair button.corbeille {
   background-color: #fff;
 }
 
-button#delete{
+button#delete {
   border: 0;
   background-color: #fff;
   color: red;
@@ -412,37 +419,35 @@ button#delete{
 }
 
 /* ..................    fin de checkbox ............. */
-
-@media (prefers-color-scheme : light) {
- body.night{
-  background: linear-gradient(180deg, rgba(204, 41, 240, 0.05) 0%, rgba(204, 41, 240, 0.20) 100%), linear-gradient(180deg, #000 7.10%, #4A384E 100%);
-}
- .night #app {
+@media (prefers-color-scheme: light) {
+  body.night {
+    background: linear-gradient(180deg, rgba(204, 41, 240, 0.05) 0%, rgba(204, 41, 240, 0.2) 100%), linear-gradient(180deg, #000 7.1%, #4A384E 100%);
+  }
+  .night #app {
     background-color: #1d1b1b;
   }
-  .night .radio-inputs{
+  .night .radio-inputs {
     background-color: #fff;
   }
-  .night .pair label::before, .night .impair label::before{
+  .night .pair label::before, .night .impair label::before {
     background: #fff;
   }
-  .night .pair input::before, 
-  .night .pair input::after, .night .impair input::before, 
+  .night .pair input::before,
+  .night .pair input::after, .night .impair input::before,
   .night .impair input::after {
     background: #fff;
   }
   .night .checklist.pair {
-    background: rgba(255, 122, 231, 0.50);
+    background: rgba(255, 122, 231, 0.5);
   }
   .night .checklist.pair input {
     background: rgba(255, 122, 231, 0);
   }
-  
-  .night .checklist.impair{
-    background: #2C265D
+  .night .checklist.impair {
+    background: #2C265D;
   }
-  .night .pair label, .night .impair label{
-    color: #fff
+  .night .pair label, .night .impair label {
+    color: #fff;
   }
   .night .pair input:checked + label, .night .impair input:checked + label {
     color: #fff;
@@ -450,42 +455,43 @@ button#delete{
   .night .pair input:checked + label::before, .night .impair input:checked + label::before {
     background: #fff;
   }
-  .night .corbeille{
+  .night .corbeille {
     background-image: url(assets/corbeille1.png);
     height: 20px;
     background-size: 20px;
   }
-  .night .impair button.corbeille{
+  .night .impair button.corbeille {
     background-color: #2C265D;
   }
-  .night .pair button.corbeille{
+  .night .pair button.corbeille {
     background-color: rgba(255, 122, 231, 0);
   }
 }
-
-@media screen and (max-width: 375px){
-  header, header.night{
+@media screen and (max-width: 375px) {
+  header, header.night {
     height: 100px;
     padding-left: 20px;
+    max-width: 100%;
   }
   .search {
-    grid: 39px/ 30px 180px 46px;
+    grid: 39px/30px 180px 46px;
     margin: 0 30px 0 20px;
   }
-
-  button.search_button{
+  .search_button {
+    margin-top: 0;
+    height: 39px;
+  }
+  button.search_button {
     background-size: 38px;
-    
   }
-  #app{
+  #app {
     width: 370px;
-    padding : 40px 0;
+    padding: 40px 0;
     background: transparent;
   }
-  .night #app{
+  .night #app {
     background: transparent;
   }
-  
   .checklist.pair, .checklist.impair {
     width: 312px;
   }
@@ -497,83 +503,94 @@ button#delete{
     width: 35px;
   }
   .toggle-checkbox:checked ~ .toggle-slot .toggle-button {
-   transform: translate(2.5px, 2.5px) rotate(0deg);
+    transform: translate(2.5px, 2.5px) rotate(0deg);
   }
   .sun-icon-wrapper {
     transform: translate(0, 0) rotate(0deg);
-    }
-    .toggle-checkbox:checked ~ .toggle-slot .moon-icon-wrapper {
-      opacity: 1;
-      transform: translate(0, 0) rotate(0deg);
-      width: 35px;
-      height: 35px;
-    }
-    .toggle-checkbox {
-      left: 330px;
-      top: 30px;
-    }
-    .radio-inputs {
-      margin-bottom: 34px;
-    }
-    .checklist.pair{
-      background-color: #fff;
-    }
-    .checklist.pair, .checklist.impair {
-      margin-bottom: 33px;
-    }
-    button#delete{
-      margin-left: 200px;
-    }
+  }
+  .toggle-checkbox:checked ~ .toggle-slot .moon-icon-wrapper {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg);
+    width: 35px;
+    height: 35px;
+  }
+  .toggle-checkbox {
+    left: 323px;
+    top: 30px;
+  }
+  .radio-inputs {
+    margin-bottom: 34px;
+  }
+  .checklist.pair {
+    background-color: #fff;
+  }
+  .checklist.pair, .checklist.impair {
+    margin-bottom: 33px;
+  }
+  button#delete {
+    margin-left: 200px;
+  }
 }
-@media only screen and (min-width: 376px) and (max-width: 480px){
-  header, header.night{
+@media only screen and (min-width: 376px) and (max-width: 480px) {
+  header, header.night {
     height: 150px;
-    max-width: 425px;
+    max-width: 100%;
     padding-left: 20px;
-     }
+  }
   .search {
-    grid: 39px/ 30px 180px 42px;
+    grid: 39px/30px 180px 42px;
     margin-right: 30px;
     margin-left: 30px;
-    }
-    button.search_button{
-      background-size: 38px;
-    }
-    #app{
-      margin-top: 0;
-      width: 100%;
-      padding: 20px 0;
-    }
-    .checklist.pair, .checklist.impair {
-      width: 312px;
-    }
-    .radio-inputs {
-      margin-top: 32px;
-      width: 370px;
-    }
-    
+  }
+  .search_button {
+    margin-top: 0;
+    height: 39px;
+  }
+  button.search_button {
+    background-size: 38px;
+  }
+  #app {
+    margin-top: 0;
+    width: 100%;
+    padding: 20px 0;
+  }
+  .night #app {
+    background: transparent;
+  }
+  .checklist.pair, .checklist.impair {
+    width: 312px;
+  }
+  .radio-inputs {
+    margin-top: 32px;
+    width: 370px;
+  }
 }
-
-@media only screen and (min-width: 481px) and (max-width: 768px){
-  header{
-  max-width: 768px;
-  padding-left: 60px;
-  padding-right: 20px;
-}
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+  header {
+    max-width: 100%;
+    padding-left: 60px;
+    padding-right: 20px;
+  }
   .search {
-    grid: 69px/ 60px 400px 64px;
+    grid: 69px/60px 400px 66px;
     margin: 0 auto;
   }
-  button.search_button{
+  button.search_button {
     background-size: 45px;
   }
-  #app{
-    padding : 40px 20px;
+  #app {
+    padding: 40px 20px;
     margin: 0 20px;
   }
 }
-@media only screen and (min-width: 2560px){
-body{
-  zoom: 200%;
+@media only screen and (min-width: 769px) and (max-width: 1220px) {
+  header {
+    padding-left: 100px;
+    padding-right: 20px;
+  }
 }
+@media only screen and (min-width: 2560px) {
+  body {
+    zoom: 200%;
+  }
 }

@@ -41,6 +41,30 @@ const checklistTemplate = (labelText) => `
   const checklistContainer = document.createElement("div");
   checklistContainer.classList.add("container");
   
+  checklistContainer.addEventListener("dragstart", (event) => {
+    event.dataTransfer.setData("text/plain", ""); // Élément doit avoir des données pour le glisser-déposer
+    event.target.classList.add("dragging");
+  });
+  
+  checklistContainer.addEventListener("dragover", (event) => {
+    event.preventDefault(); // Empêche le comportement par défaut (par ex. l'ouverture de liens)
+  });
+  
+  checklistContainer.addEventListener("drop", (event) => {
+    event.preventDefault();
+  
+    const draggingElement = document.querySelector(".dragging");
+    const targetElement = event.target.closest(".checklist");
+  
+    if (draggingElement && targetElement) {
+      // Échangez les positions des éléments dans le DOM
+      checklistContainer.insertBefore(draggingElement, targetElement.nextSibling);
+  
+      // Réinitialisez les styles
+      draggingElement.classList.remove("dragging");
+    }
+  });
+  
 
   function getChecklistItemsFromLocalStorage() {
     const checklistItemsString = localStorage.getItem("checklistItems");
@@ -149,6 +173,7 @@ const checklistTemplate = (labelText) => `
           const checklistParent = checklistDiv.parentNode;
           // Remonter la div "checklist" en première position dans son parent (prepend)
           checklistParent.prepend(checklistDiv);
+          updateChecklistClasses();
         }
       });
 
@@ -162,5 +187,3 @@ const checklistTemplate = (labelText) => `
     }
   });
 });
-
-

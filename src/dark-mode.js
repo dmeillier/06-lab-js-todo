@@ -45,12 +45,6 @@ label.appendChild(toggleSlot);
 // Ajoutez le label à un élément existant dans le DOM (par exemple, le corps du document)
 header.appendChild(label);
 
-// Ajoutez le code pour gérer le basculement en JavaScript
-toggleButton.addEventListener("click", () => {
-  toggleCheckbox.checked = !toggleCheckbox.checked;
-  document.body.classList.toggle('night');
-  updateToggle();
-});
 
 toggleCheckbox.addEventListener("change", () => {
   updateToggle();
@@ -59,8 +53,9 @@ toggleCheckbox.addEventListener("change", () => {
 function updateToggle() {
   const sunIcon = document.querySelector(".sun-icon-wrapper");
   const moonIcon = document.querySelector(".moon-icon-wrapper");
+
   const isChecked = toggleCheckbox.checked;
-  
+
   if (isChecked) {
     sunIcon.style.display = "none";
     moonIcon.style.display = "block";

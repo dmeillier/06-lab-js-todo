@@ -1,14 +1,14 @@
 //import { document } from "postcss";
 
-import "./style.css"
+import "./style.scss"
 import "./header.js"
 import "./dark-mode.js"
 import "./boutons.js"
 import "./template.js"
 import "./drag&drop.js"
 
-document.addEventListener("DOMContentLoaded", () => {
-const options = ["Toutes les tâches", "Tâches actives", "Tâches achevées"];
+
+//const options = ["Toutes les tâches", "Tâches actives", "Tâches achevées"];
 const deleteButton = document.getElementById("delete");
 const app = document.querySelector("#app");
 const customRadioHolder = document.getElementById("radioContainer");
@@ -17,7 +17,6 @@ const customRadioHolder = document.getElementById("radioContainer");
     function displayChecklists(option) {
       const checklists = app.querySelectorAll(".checklist");
       const showDeleteButton = option === "Tâches achevées"; // Variable pour indiquer si le bouton deleteButton doit être affiché
-    
       let displayedChecklistsCount = 0; // Compteur pour les checklists affichées
 
       checklists.forEach((checklist, index) => {
@@ -122,8 +121,36 @@ function handleDrop(event) {
     moveChecklist(draggedElement, dropTarget);
   }
 }
+function saveChecklistItemsToLocalStorage() {
+ 
+  const checklistStates = [];
 
-document.addEventListener("DOMContentLoaded", () => {
+  checklists.forEach(checklist => {
+    
+    if (input) {
+      const state = {
+        id: checklist.id,
+        checked: input.checked
+      };
+      checklistStates.push(state);
+    }
+  });
+
+  localStorage.setItem("checklistStates", JSON.stringify(checklistStates));
+
+}
+// Gérer le changement d'état de la case à cocher
+function handleCheckboxChange(event) {
+  console.log('lol');
+    const checkbox = event.target;
+  const checklist = checkbox.closest(".checklist");
+  if (checklist) {
+    // Mettre à jour l'état dans le stockage local
+    saveChecklistItemsToLocalStorage();
+    updateChecklistClasses();
+  }
+}
+
   // Ajouter des gestionnaires d'événements pour la suppression, le déplacement et le drag and drop des checklists
   const deleteButtons = document.querySelectorAll(".corbeille");
   deleteButtons.forEach(button => {
@@ -140,8 +167,13 @@ document.addEventListener("DOMContentLoaded", () => {
   container.ondragover = handleDragOver;
   container.ondrop = handleDrop;
   });
+
   
-})
+
+const checkboxes = document.querySelectorAll(".checklist input[type='checkbox']");
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener("change", handleCheckboxChange);
   });
+  
 
   
