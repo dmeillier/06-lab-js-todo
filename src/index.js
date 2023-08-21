@@ -29,23 +29,23 @@ const customRadioHolder = document.getElementById("radioContainer");
        
         if (shouldDisplay) {
           checklist.classList.remove("pair", "impair");
-          if (index % 2 === 0) {
-            checklist.classList.add("impair");
+            if (index % 2 === 0) {
+              checklist.classList.add("impair");
+            } else {
+              checklist.classList.add("pair");
+            }
           } else {
-            checklist.classList.add("pair");
-          }
-        } else {
           checklist.classList.remove("pair", "impair");
-        }if (shouldDisplay) {
+        }/*if (shouldDisplay) {
           displayedChecklistsCount++;
     
           checklist.classList.remove("pair", "impair");
           checklist.classList.add(displayedChecklistsCount % 2 === 0 ? "pair" : "impair");
-        }
+        }*/
       });
-        
-      deleteButton.style.display = showDeleteButton ? "block" : "none"; // Afficher ou masquer le bouton deleteButton en fonction de la valeur de showDeleteButton
-    }
+       
+      deleteButton.style.display = showDeleteButton ? "block" : "none"; 
+        }
 
     // Supprimer une checklist
     function deleteChecklist(checklist) {
@@ -141,14 +141,13 @@ function saveChecklistItemsToLocalStorage() {
 }
 // Gérer le changement d'état de la case à cocher
 function handleCheckboxChange(event) {
-  console.log('lol');
-    const checkbox = event.target;
+  const checkbox = event.target;
   const checklist = checkbox.closest(".checklist");
   if (checklist) {
     // Mettre à jour l'état dans le stockage local
     saveChecklistItemsToLocalStorage();
     updateChecklistClasses();
-  }
+    }
 }
 
   // Ajouter des gestionnaires d'événements pour la suppression, le déplacement et le drag and drop des checklists
@@ -167,8 +166,6 @@ function handleCheckboxChange(event) {
   container.ondragover = handleDragOver;
   container.ondrop = handleDrop;
   });
-
-  
 
 const checkboxes = document.querySelectorAll(".checklist input[type='checkbox']");
   checkboxes.forEach(checkbox => {

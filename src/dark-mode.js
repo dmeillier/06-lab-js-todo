@@ -22,8 +22,6 @@ sunIcon.classList.add("iconify", "sun-icon");
 sunIcon.setAttribute("data-icon", "feather-sun");
 sunIcon.setAttribute("data-inline", "false");
 
-
-
 const moonIconWrapper = document.createElement("div");
 moonIconWrapper.classList.add("moon-icon-wrapper");
 
@@ -45,7 +43,6 @@ label.appendChild(toggleSlot);
 // Ajoutez le label à un élément existant dans le DOM (par exemple, le corps du document)
 header.appendChild(label);
 
-
 toggleCheckbox.addEventListener("change", () => {
   updateToggle();
 });
@@ -63,7 +60,6 @@ function updateToggle() {
     main.classList.add("night");
     document.body.classList.add("night");
     document.body.classList.remove("day");
-    // Ajoutez ici d'autres actions à effectuer lorsque le bouton est activé
   } else {
     sunIcon.style.display = "block";
     moonIcon.style.display = "none";
@@ -71,6 +67,5 @@ function updateToggle() {
     main.classList.add("day");
     document.body.classList.remove("night");
     document.body.classList.add("day");
-    // Ajoutez ici d'autres actions à effectuer lorsque le bouton est désactivé
-  }
+   }
 }

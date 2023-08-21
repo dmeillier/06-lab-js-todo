@@ -22,7 +22,7 @@ for (let i = 0; i < options.length; i++) {
     radio.name = "radio";
     radio.value = options[i];
     if (i === 0) {
-        radio.checked = true; // Assurez-vous qu'un seul bouton radio est coché au départ
+        radio.checked = true; 
     }
 
     // Créez l'élément span contenant le texte de l'option
@@ -30,16 +30,16 @@ for (let i = 0; i < options.length; i++) {
     span.classList.add("name");
     span.textContent = options[i];
 
-    // Ajoutez les éléments créés au DOM
+    // Ajoutez les éléments créés 
     label.appendChild(radio);
     label.appendChild(span);
-    divradio.appendChild(label); // Utilisez "divradio" ici au lieu de "customRadioHolder"
+    divradio.appendChild(label); 
 }
 
 // Sélectionnez le conteneur pour les boutons radio (après les avoir créés)
 const customRadioHolder = document.getElementById("radioContainer");
 
-// Ajoutez "divradio" contenant les boutons radio au DOM
+// Ajoutez "divradio" contenant les boutons radio
 app.prepend(divradio);
 
 const checklist = document.querySelectorAll(".checklist");

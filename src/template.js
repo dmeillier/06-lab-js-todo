@@ -33,7 +33,6 @@ const checklistTemplate = (labelText) => `
     checklist.appendChild(checkbox);
     checklist.appendChild(label);
     checklist.appendChild(corbeilleButton);
-
     return checklist;
   }
 
@@ -65,7 +64,6 @@ const checklistTemplate = (labelText) => `
     }
   });
   
-
   function getChecklistItemsFromLocalStorage() {
     const checklistItemsString = localStorage.getItem("checklistItems");
     if (checklistItemsString) {
@@ -86,11 +84,11 @@ const checklistTemplate = (labelText) => `
     const checklistDivs = checklistContainer.querySelectorAll(".checklist");
     checklistDivs.forEach((checklist, index) => {
       if (index % 2 === 0) {
-        checklist.classList.remove("impair");
-        checklist.classList.add("pair");
-      } else {
         checklist.classList.remove("pair");
         checklist.classList.add("impair");
+      } else {
+        checklist.classList.remove("impair");
+        checklist.classList.add("pair");
       }
     });
   }
@@ -127,11 +125,11 @@ const checklistTemplate = (labelText) => `
   function handleChecklistClass(checklist) {
     const index = Array.from(document.querySelectorAll(".checklist")).indexOf(checklist);
     if (index % 2 === 0) {
-      checklist.classList.remove("impair");
-      checklist.classList.add("pair");
-    } else {
       checklist.classList.remove("pair");
       checklist.classList.add("impair");
+    } else {
+      checklist.classList.remove("impair");
+      checklist.classList.add("pair");
     }
   }
 
