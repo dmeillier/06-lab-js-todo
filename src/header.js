@@ -15,6 +15,8 @@ input.setAttribute("placeholder", "Rechercher");
 // Création de l'élément bouton
 let button = document.createElement("button");
 button.setAttribute("class", "search_button");
+button.setAttribute("type", "button");
+button.setAttribute("aria-label", "ajouter une tâche");
 
 // Ajout des éléments dans le div
 div.appendChild(box);

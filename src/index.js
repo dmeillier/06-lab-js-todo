@@ -36,12 +36,12 @@ const customRadioHolder = document.getElementById("radioContainer");
             }
           } else {
           checklist.classList.remove("pair", "impair");
-        }/*if (shouldDisplay) {
+        }if (shouldDisplay) {
           displayedChecklistsCount++;
     
           checklist.classList.remove("pair", "impair");
           checklist.classList.add(displayedChecklistsCount % 2 === 0 ? "pair" : "impair");
-        }*/
+        }
       });
        
       deleteButton.style.display = showDeleteButton ? "block" : "none"; 
@@ -67,7 +67,6 @@ const customRadioHolder = document.getElementById("radioContainer");
         }
       });
     })
-
    
     // Ajouter un gestionnaire d'événement pour le changement d'état des boutons radio
     customRadioHolder.addEventListener("change", (event) => {

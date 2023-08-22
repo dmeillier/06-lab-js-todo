@@ -17,12 +17,14 @@ const checklistTemplate = (labelText) => `
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
+    checkbox.setAttribute("aria-label", checkbox);
     
     const label = document.createElement("label");
     label.textContent = labelText;
 
     const corbeilleButton = document.createElement("button");
     corbeilleButton.classList.add("corbeille");
+    corbeilleButton.setAttribute("aria-label", "corbeille");
 
     corbeilleButton.addEventListener("click", () => {
       checklist.remove();
@@ -167,21 +169,21 @@ const checklistTemplate = (labelText) => `
 
         if (searchText === labelText) {
           labelExists = true;
-          const checklistDiv = label.closest(".checklist");
-          const checklistParent = checklistDiv.parentNode;
-          // Remonter la div "checklist" en première position dans son parent (prepend)
-          checklistParent.prepend(checklistDiv);
-          updateChecklistClasses();
         }
       });
 
       if (!labelExists) {
         addChecklist(searchText);
       }
-    
+        updateChecklistClasses();
+
       input.value = ""; // Réinitialiser le champ d'entrée après avoir ajouté l'élément
       const checklistItems = getChecklistItems();
       saveChecklistItemsToLocalStorage(checklistItems);
     }
+    const checklists = document.querySelectorAll(".checklist");
+  checklists.forEach(checklist => {
+    checklist.style.display = "grid";
+  })
   });
 });

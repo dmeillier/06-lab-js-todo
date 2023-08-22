@@ -1,4 +1,4 @@
-import "./boutons.js"
+import "./boutons.js";
 const header = document.querySelector("header");
 const main = document.querySelector("main");
 
@@ -7,7 +7,9 @@ const main = document.querySelector("main");
 const toggleButton = document.createElement("div");
 toggleButton.classList.add("toggle-button");
 const label = document.createElement("label");
+label.setAttribute("aria-label", "dark-mode");
 const toggleCheckbox = document.createElement("input");
+toggleCheckbox.setAttribute("aria-label", "dark-mode");
 toggleCheckbox.setAttribute("type", "checkbox");
 toggleCheckbox.classList.add("toggle-checkbox");
 
@@ -43,9 +45,14 @@ label.appendChild(toggleSlot);
 // Ajoutez le label à un élément existant dans le DOM (par exemple, le corps du document)
 header.appendChild(label);
 
-toggleCheckbox.addEventListener("change", () => {
-  updateToggle();
-});
+// Récupérez le paramètre prefers-color-scheme
+const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+// Mettez à jour le mode en fonction de la préférence système
+if (prefersDarkScheme.matches) {
+  toggleCheckbox.checked = true;
+  updateToggle(); // Ici, nous appelons la fonction updateToggle
+}
 
 function updateToggle() {
   const sunIcon = document.querySelector(".sun-icon-wrapper");
@@ -67,5 +74,14 @@ function updateToggle() {
     main.classList.add("day");
     document.body.classList.remove("night");
     document.body.classList.add("day");
-   }
+  }
 }
+
+toggleCheckbox.addEventListener("change", () => {
+  updateToggle();
+});
+
+// Mettre à jour le mode sombre lors du chargement initial
+updateToggle();
+
+

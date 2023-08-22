@@ -4,7 +4,7 @@
 body {
   background: linear-gradient(270deg, rgba(102, 209, 255, 0.25) 0%, rgba(204, 41, 240, 0.5) 100%);
   margin: 0;
-  height: 100%;
+  min-height: 100vh;
 }
 
 header {
@@ -19,7 +19,7 @@ header {
 }
 
 .box {
-  background-image: url(assets/loupe.png);
+  background-image: url(assets/loupe1.png);
   background-size: 1.875rem;
   background-repeat: no-repeat;
   background-position: 100% 50%;
@@ -190,9 +190,10 @@ main {
 /* ..................    checkbox ............. */
 .container {
   margin-top: 3.4375rem;
+  overscroll-behavior: contain;
 }
 
-.checklist.pair, .checklist.impair {
+.checklist {
   cursor: grab;
   margin-bottom: 2.8125rem;
   width: 623px;
@@ -206,8 +207,7 @@ main {
   align-items: center;
   justify-content: center;
 }
-
-.impair {
+.checklist.impair {
   background-color: rgba(255, 122, 231, 0.5);
 }
 
@@ -412,6 +412,54 @@ button#delete {
 }
 
 /* ..................    fin de checkbox ............. */
+@media (prefers-color-scheme: dark) {
+  body.night {
+    background: linear-gradient(180deg, rgba(204, 41, 240, 0.05) 0%, rgba(204, 41, 240, 0.2) 100%), linear-gradient(180deg, #000 7.1%, #4A384E 100%);
+  }
+  .night #app {
+    background-color: #1d1b1b;
+  }
+  .night .radio-inputs {
+    background-color: #fff;
+  }
+  .night .pair label::before, .night .impair label::before {
+    background: #fff;
+  }
+  .night .pair input::before,
+  .night .pair input::after, .night .impair input::before,
+  .night .impair input::after {
+    background: #fff;
+  }
+  .night .checklist.pair {
+    background: rgba(255, 122, 231, 0.5);
+  }
+  .night .checklist.pair input {
+    background: rgba(255, 122, 231, 0);
+  }
+  .night .checklist.impair {
+    background: #2C265D;
+  }
+  .night .pair label, .night .impair label {
+    color: #fff;
+  }
+  .night .pair input:checked + label, .night .impair input:checked + label {
+    color: #fff;
+  }
+  .night .pair input:checked + label::before, .night .impair input:checked + label::before {
+    background: #fff;
+  }
+  .night .corbeille {
+    background-image: url(assets/corbeille1.png);
+    height: 20px;
+    background-size: 1.25rem;
+  }
+  .night .impair button.corbeille {
+    background-color: #2C265D;
+  }
+  .night .pair button.corbeille {
+    background-color: rgba(255, 122, 231, 0);
+  }
+}
 @media (prefers-color-scheme: light) {
   body.night {
     background: linear-gradient(180deg, rgba(204, 41, 240, 0.05) 0%, rgba(204, 41, 240, 0.2) 100%), linear-gradient(180deg, #000 7.1%, #4A384E 100%);
