@@ -19,13 +19,15 @@ document.addEventListener("DOMContentLoaded", () => {
   function handleTouchMove(e) {
     const touch = e.touches[0];
     if (draggedElement && touch) {
-      // Ajoutez ici la logique de mise à jour visuelle pour le déplacement tactile
+      const deltaX = touch.clientX - draggedElement.offsetLeft;
+    const deltaY = touch.clientY - draggedElement.offsetTop;
+    draggedElement.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
     }
   }
 
   function handleTouchEnd(e) {
     if (draggedElement) {
-      // Ajoutez ici la logique de traitement lorsque le glissement tactile se termine
+      draggedElement.style.transform = "translate(0, 0)";
       draggedElement = null;
     }
   }
