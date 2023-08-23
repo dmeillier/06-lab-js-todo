@@ -25,9 +25,11 @@
       const dropTargetIndex = dropTarget ? [...container.children].indexOf(dropTarget) : 0;
       const draggedElementIndex = [...container.children].indexOf(draggedElement);
   
-      container.insertBefore(draggedElement, draggedElementIndex < dropTargetIndex ? dropTarget.nextSibling : dropTarget);
+      container.insertBefore(
+        draggedElement, 
+        draggedElementIndex < dropTargetIndex ? dropTarget.nextSibling : dropTarget);
   
-      const newChecklists = container.querySelectorAll(".checklist");
+        const newChecklists = container.querySelectorAll(".checklist");
       newChecklists.forEach((checklist, index) => {
         const isEven = index % 2 === 0;
         checklist.classList.toggle("impair", isEven);

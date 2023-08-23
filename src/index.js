@@ -1,12 +1,10 @@
-//import { document } from "postcss";
-
 import "./style.scss"
 import "./header.js"
 import "./dark-mode.js"
 import "./boutons.js"
 import "./template.js"
 import "./drag&drop.js"
-
+import "./mobile.js"
 
 //const options = ["Toutes les tâches", "Tâches actives", "Tâches achevées"];
 const deleteButton = document.getElementById("delete");
@@ -104,7 +102,7 @@ function handleDragStart(event) {
     event.dataTransfer.setData('text/plain', ''); // Nécessaire pour Firefox
     event.dataTransfer.effectAllowed = "move";
     event.dataTransfer.dropEffect = "move";
-    event.dataTransfer.setDragImage(draggedElement, 0, 0);
+    event.dataTransfer.setDragImage(draggedElement, event.clientX - draggedElement.getBoundingClientRect().left, event.clientY - draggedElement.getBoundingClientRect().top);
   }
 }
 
@@ -115,7 +113,7 @@ function handleDragOver(event) {
 function handleDrop(event) {
   event.preventDefault();
   const draggedElement = event.target.closest(".checklist");
-  const dropTarget = draggedElement ? event.target.closest(".checklist") : null;
+  const dropTarget = event.target.closest(".container");
   if (draggedElement && dropTarget) {
     moveChecklist(draggedElement, dropTarget);
   }
