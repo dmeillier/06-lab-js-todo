@@ -14,7 +14,7 @@ const stylesHandler = MiniCssExtractPlugin.loader;
 const config = {
     entry: './src/index.js',
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'public'),
     },
     devServer: {
         open: true,
@@ -22,7 +22,7 @@ const config = {
         liveReload: true,
         port: 3000,
         static:{
-          directory: path.join(__dirname, "dist"),
+          directory: path.join(__dirname, "public"),
         },
         hot: false,
        
