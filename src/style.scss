@@ -413,7 +413,7 @@ button#delete{
   border: 0;
   background-color: #fff;
   color: red;
-  margin-left: 18.75rem;
+  margin-left: 330px;
   display: none;
 }
 
@@ -575,7 +575,7 @@ button#delete{
       top: 1.875rem;
     }
     .radio-inputs {
-      margin-bottom: 2.125rem;
+      margin-bottom: 0;
     }
     .checklist.pair{
       background-color: #fff;
@@ -584,7 +584,8 @@ button#delete{
       margin-bottom: 2.0625rem;
     }
     button#delete{
-      margin-left: 12.5rem;
+      margin-left: 230px;
+      background: transparent;
     }
 }
 @media only screen and (min-width: 376px) and (max-width: 480px){
@@ -595,8 +596,8 @@ button#delete{
      }
   .search {
     grid: 42px/ 1.875rem 11.25rem 2.625rem;
-    margin-right: 1.875rem;
-    margin-left: 1.875rem;
+    margin-right: 1.25rem;
+    margin-left: 1.25rem;
     }
     button.search_button{
       margin-top: 0.3125rem;
@@ -618,13 +619,16 @@ button#delete{
       margin-top: 2rem;
       width: 370px;
     }
+    button#delete{
+      margin-left: 240px;
     
+    }
 }
 
 @media only screen and (min-width: 481px) and (max-width: 768px){
   header{
   max-width: 100%;
-  padding-left: 3.75rem;
+  padding-left: 60px;
   padding-right: 1.25rem;
 }
   .search {
@@ -638,19 +642,19 @@ button#delete{
     padding : 2.5rem 1.25rem;
     margin: 0 1.25rem 1.25rem;
   }
+  
 }
 @media only screen and (min-width: 769px) and (max-width: 1220px){
   header{
     padding-left: 0;
     padding-right: 1.25rem;
-    .search{
-      grid: 4.3125rem/ 3.875rem 25rem 4.125rem;
+  }
+    // .search{
+    //   grid: 4.3125rem/ 3.875rem 25rem 4.125rem;
 
-    }
-      }
-//       .radio-inputs {
-//         width : 100%;
-// }
+    // }
+  }
+
 @media only screen and (min-width: 2560px){
 body{
   zoom: 200%;

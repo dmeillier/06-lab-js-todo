@@ -1,4 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
   const input = document.querySelector("input.search_input");
 
   // Template pour la checklist
@@ -186,4 +185,3 @@ const checklistTemplate = (labelText) => `
     checklist.style.display = "grid";
   })
   });
-});

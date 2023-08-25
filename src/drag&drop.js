@@ -1,5 +1,4 @@
-
-  document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
     const checklists = document.querySelectorAll(".checklist");
     const containers = document.querySelectorAll(".container");
     let draggedElement = null;

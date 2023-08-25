@@ -4,27 +4,29 @@ import "./dark-mode.js"
 import "./boutons.js"
 import "./template.js"
 import "./drag&drop.js"
-import "./mobile.js"
+import {handleCheckboxChange } from "./template.js"
 
-//const options = ["Toutes les tâches", "Tâches actives", "Tâches achevées"];
 const deleteButton = document.getElementById("delete");
 const app = document.querySelector("#app");
 const customRadioHolder = document.getElementById("radioContainer");
+const checklists = document.querySelectorAll(".checklist"); // Déplacer cette ligne ici
+const containers = document.querySelectorAll(".container"); // Déplacer cette ligne ici
+const checkboxes = document.querySelectorAll(".checklist input[type='checkbox']"); // Déplacer cette ligne ici
+const filters = document.querySelectorAll('.radio');
 
     // Fonction pour afficher les div checklists selon l'option sélectionnée
     function displayChecklists(option) {
-      const checklists = app.querySelectorAll(".checklist");
       const showDeleteButton = option === "Tâches achevées"; // Variable pour indiquer si le bouton deleteButton doit être affiché
       let displayedChecklistsCount = 0; // Compteur pour les checklists affichées
-
+      
       checklists.forEach((checklist, index) => {
         const input = checklist.querySelector("input[type='checkbox']");
-        const shouldDisplay = option === "Toutes les tâches" || // Afficher toutes les tâches si l'option est "Toutes les tâches"
+        const shouldDisplay = 
+          option === "Toutes les tâches" || // Afficher toutes les tâches si l'option est "Toutes les tâches"
           (option === "Tâches actives" && input && !input.checked) || // Afficher les tâches actives si l'option est "Tâches actives" et la checkbox n'est pas cochée
           (option === "Tâches achevées" && input && input.checked); // Afficher les tâches achevées si l'option est "Tâches achevées" et la checkbox est cochée
     
         checklist.style.display = shouldDisplay ? "grid" : "none";
-       
         if (shouldDisplay) {
           checklist.classList.remove("pair", "impair");
             if (index % 2 === 0) {
@@ -53,7 +55,7 @@ const customRadioHolder = document.getElementById("radioContainer");
     }
 
     deleteButton.addEventListener("click", () => {
-      const checklists = app.querySelectorAll(".checklist");
+
       // Parcourez toutes les checklists
       checklists.forEach(checklist => {
         if (checklist.style.display !== "none") {
@@ -79,11 +81,14 @@ function moveChecklist(checklist, dropTarget) {
   const draggedElementIndex = Array.from(container.children).indexOf(checklist);
 
   if (draggedElementIndex < dropTargetIndex) {
-    container.insertBefore(checklist, dropTarget.nextSibling);
+    if (dropTarget.nextSibling) {
+      container.insertBefore(checklist, dropTarget.nextSibling);
+    } else {
+      container.appendChild(checklist);
+    }
   } else {
     container.insertBefore(checklist, dropTarget);
   }
-  updateChecklistClasses(); // Appeler handleChecklistClass pour mettre à jour les classes des checklists après le déplacement
 }
 
 // Gérer le clic sur le bouton corbeille pour supprimer une checklist
@@ -92,34 +97,41 @@ function handleDeleteButtonClick(event) {
   if (checklist) {
     deleteChecklist(checklist);
   }
-  updateChecklistClasses();
+ // updateChecklistClasses();
 }
 
-// Gérer le drag and drop
+// Gérer le début du glisser-déposer
 function handleDragStart(event) {
-  const draggedElement = event.target.closest(".checklist");
-  if (draggedElement) {
-    event.dataTransfer.setData('text/plain', ''); // Nécessaire pour Firefox
-    event.dataTransfer.effectAllowed = "move";
-    event.dataTransfer.dropEffect = "move";
-    event.dataTransfer.setDragImage(draggedElement, event.clientX - draggedElement.getBoundingClientRect().left, event.clientY - draggedElement.getBoundingClientRect().top);
-  }
+  event.dataTransfer.setData('text/plain', event.target.id);
 }
 
+// Gérer le survol pendant le glisser-déposer
 function handleDragOver(event) {
   event.preventDefault();
 }
 
+// Gérer le dépôt lors du lâcher de l'élément
 function handleDrop(event) {
   event.preventDefault();
-  const draggedElement = event.target.closest(".checklist");
+  const checklistId = event.dataTransfer.getData('text/plain');
+  const draggedChecklist = document.getElementById(checklistId);
+
   const dropTarget = event.target.closest(".container");
-  if (draggedElement && dropTarget) {
-    moveChecklist(draggedElement, dropTarget);
+  if (draggedChecklist && dropTarget) {
+    moveChecklist(draggedChecklist, dropTarget);
   }
 }
+
+// Attacher les gestionnaires d'événements aux éléments
+checklists.forEach(checklist => {
+  checklist.addEventListener("dragstart", handleDragStart);
+});
+
+containers.forEach(container => {
+  container.addEventListener("dragover", handleDragOver);
+  container.addEventListener("drop", handleDrop);
+});
 function saveChecklistItemsToLocalStorage() {
- 
   const checklistStates = [];
 
   checklists.forEach(checklist => {
@@ -134,18 +146,55 @@ function saveChecklistItemsToLocalStorage() {
   });
 
   localStorage.setItem("checklistStates", JSON.stringify(checklistStates));
+}
+// .........................................
 
-}
-// Gérer le changement d'état de la case à cocher
-function handleCheckboxChange(event) {
-  const checkbox = event.target;
-  const checklist = checkbox.closest(".checklist");
-  if (checklist) {
-    // Mettre à jour l'état dans le stockage local
-    saveChecklistItemsToLocalStorage();
-    updateChecklistClasses();
+// Ajouter un gestionnaire d'événement aux cases à cocher des checklists
+checklists.forEach(checklist => {
+  const input = checklist.querySelector("input[type='checkbox']");
+  
+  input.addEventListener('change', function() {
+    const isChecked = input.checked;
+        
+    if (isChecked) {
+      checklist.style.display = 'none';
+    } else {
+      const selectedOption = document.querySelector('.radio:checked');
+      if (selectedOption && selectedOption.value === "Tâches achevées") {
+        checklist.style.display = 'none';
+      } else {
+        checklist.style.display = 'grid';
+      }
     }
+
+    applyFilters();
+  });
+});
+
+function applyFilters() {
+  const selectedOption = document.querySelector('.radio:checked')
+
+  checklists.forEach(checklist => {
+    const input = checklist.querySelector("input[type='checkbox']");
+    if (selectedOption && input) {
+    if ((selectedOption.value === "Tâches actives" && input.checked) ||
+        (selectedOption.value === "Tâches achevées" && !input.checked)) {
+      checklist.style.display = 'none';
+    }
+    else {
+      checklist.style.display = 'grid';
+    }
+    }
+  });
 }
+
+// Ajouter un gestionnaire d'événement aux filtres
+filters.forEach(filter => {
+  filter.addEventListener('change', applyFilters);
+});
+
+// Appliquer les filtres au chargement de la page
+applyFilters();
 
   // Ajouter des gestionnaires d'événements pour la suppression, le déplacement et le drag and drop des checklists
   const deleteButtons = document.querySelectorAll(".corbeille");
@@ -153,21 +202,16 @@ function handleCheckboxChange(event) {
     button.addEventListener("click", handleDeleteButtonClick);
   });
 
-  const checklists = document.querySelectorAll(".checklist");
   checklists.forEach(checklist => {
   checklist.ondragstart = handleDragStart;
   });
 
-  const containers = document.querySelectorAll(".container");
   containers.forEach(container => {
   container.ondragover = handleDragOver;
   container.ondrop = handleDrop;
   });
 
-const checkboxes = document.querySelectorAll(".checklist input[type='checkbox']");
+
   checkboxes.forEach(checkbox => {
     checkbox.addEventListener("change", handleCheckboxChange);
   });
-  
-
-  
