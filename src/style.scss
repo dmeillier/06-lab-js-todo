@@ -196,7 +196,7 @@ header{
   position: relative;
   box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
   display: grid;
-  grid-template-columns: 0.625rem 1fr 1.875rem;
+  grid-template-columns: 0.625rem 1fr 3.125rem;
   align-items: center;
   justify-content: center;
 
@@ -219,9 +219,10 @@ header{
     display: grid;
     align-items: center;
     width: fit-content;
-   text-align: center;
+   text-align: left;
     transition: color 0.3s ease;
     margin:0 1.25rem 0 3.125rem;
+    padding-right: 20px;
   }
   
   .pair label::before, .impair label::before, .pair label::after, .impair label::after {
@@ -395,19 +396,27 @@ header{
       box-shadow: 0 -0.9375rem 0 0 #4f29f0, 0.875rem -0.5rem 0 0 #4f29f0, 0.875rem 0.5rem 0 0 #4f29f0, 0 0.9375rem 0 0 #4f29f0, -0.875rem 0.5rem 0 0 #4f29f0, -0.875rem -0.5rem 0 0 #4f29f0;
     }
   }
+  
+.stylo{
+  background-color: transparent;
+  background-image: url(./medias/stylo.svg);
+  background-repeat: no-repeat;
+  background-size: 18px;
+  width: 25px;
+  height: 20px;
+  border: none
+}
 
 .corbeille{
-  background-color: rgba(255, 122, 231, 0);
+  background-color: transparent;
   background-image: url(./medias/corbeille.png);
   background-repeat: no-repeat;
-  background-size: 1.25rem;
+  background-size: 20px;
+  width: 25px;
   height: 20px;
-  justify-content: end;
   border: none;
 }
-.pair button.corbeille {
-  background-color: #fff;
-}
+
 
 button#delete{
   border: 0;
@@ -456,17 +465,17 @@ button#delete{
   .night .pair input:checked + label::before, .night .impair input:checked + label::before {
     background: #fff;
   }
+  .night .stylo{
+    background-image: url(./medias/styloblc.svg);
+    height: 20px;
+    background-size: 1.25rem;
+  }
   .night .corbeille{
     background-image: url(./medias/corbeille1.png);
     height: 20px;
     background-size: 1.25rem;
   }
-  .night .impair button.corbeille{
-    background-color: #2C265D;
-  }
-  .night .pair button.corbeille{
-    background-color: rgba(255, 122, 231, 0);
-  }
+  
 }
 
 @media (prefers-color-scheme : light ) {
@@ -506,6 +515,11 @@ button#delete{
    .night .pair input:checked + label::before, .night .impair input:checked + label::before {
      background: #fff;
    }
+   .night .stylo{
+    background-image: url(./medias/styloblc.svg);
+    height: 20px;
+    background-size: 1.25rem;
+  }
    .night .corbeille{
      background-image: url(./medias/corbeille1.png);
      height: 20px;

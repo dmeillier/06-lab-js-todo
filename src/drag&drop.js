@@ -1,20 +1,26 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("mousedown", function(e)  {
     const checklists = document.querySelectorAll(".checklist");
     const containers = document.querySelectorAll(".container");
     let draggedElement = null;
   
+   
     containers.forEach((container) => {
       container.addEventListener("dragover", (e) => e.preventDefault());
       container.addEventListener("drop", handleDrop);
+      //dragStart(evt);
     });
-  
+
+  //   function dragStart(evt){
+  //     evt.dataTransfer.setData('text/plain', evt.target.id);
+  // }
+
     checklists.forEach((checklist) => {
       checklist.addEventListener("dragstart", (e) => {
         e.dataTransfer.setData("text/plain", ""); // Nécessaire pour Firefox
         draggedElement = checklist;
       });
     });
-  
+
     function handleDrop(e) {
       e.preventDefault();
       if (!draggedElement) return;
