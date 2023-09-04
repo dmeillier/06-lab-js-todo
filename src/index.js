@@ -5,24 +5,16 @@ import "./boutons.js"
 import "./template.js"
 import "./drag&drop.js"
 import "./move-checklists.js"
-//import {handleCheckboxChange } from "./template.js"
-import {updateChecklistClasses, getChecklistItems} from "./template.js"
+import {getChecklistItems} from "./template.js"
 
 const deleteButton = document.getElementById("delete");
 const checklists = document.querySelectorAll(".checklist"); 
 const containers = document.querySelectorAll(".container"); 
 
-    checklists.forEach((checklist, index) => {
-        checklist.classList.remove("pair", "impair");
-        checklist.classList.add(index % 2 === 0 ? "impair" : "pair");
-      })
-      
-
-    // Supprimer une checklist
+     // Supprimer une checklist
     function deleteChecklist(checklist) {
       checklist.remove();
       saveChecklistItemsToLocalStorage(getChecklistItems());
-      updateChecklistClasses(); // Appeler handleChecklistClass pour mettre à jour les classes des checklists restantes
     }
 
     deleteButton.addEventListener("click", () => {
@@ -38,12 +30,6 @@ const containers = document.querySelectorAll(".container");
         }
       });
     })
-    
- // Ajouter un gestionnaire d'événement pour le changement d'état des boutons radio
-//  customRadioHolder.addEventListener("change", (event) => {
-//   const selectedOption = event.target.value;
-//   displayChecklists(selectedOption);
-// });
 
 // Gérer le déplacement de la checklist
 function moveChecklist(checklist, dropTarget) {
@@ -68,7 +54,6 @@ function handleDeleteButtonClick(event) {
   if (checklist) {
     deleteChecklist(checklist);
   }
- updateChecklistClasses();
 }
 
 // Gérer le début du glisser-déposer
@@ -119,8 +104,6 @@ function saveChecklistItemsToLocalStorage() {
 
   localStorage.setItem("checklistStates", JSON.stringify(checklistStates));
 }
-// .........................................
-
   // Ajouter des gestionnaires d'événements pour la suppression, le déplacement et le drag and drop des checklists
   const deleteButtons = document.querySelectorAll(".corbeille");
   deleteButtons.forEach(button => {
@@ -135,8 +118,3 @@ function saveChecklistItemsToLocalStorage() {
   container.ondragover = handleDragOver;
   container.ondrop = handleDrop;
   });
-
-
-  // checkboxes.forEach(checkbox => {
-  //   checkbox.addEventListener("change", handleCheckboxChange);
-  // });

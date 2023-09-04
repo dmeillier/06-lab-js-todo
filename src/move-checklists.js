@@ -4,11 +4,6 @@ const checklists = document.querySelectorAll(".checklist");
 
 function updateChecklistClasses() {
   const visibleChecklists = Array.from(document.querySelectorAll('.checklist[style*="grid"]'));
-
-  visibleChecklists.forEach((checklist, index) => {
-    checklist.classList.remove("pair", "impair");
-    checklist.classList.add(index % 2 === 0 ? "impair" : "pair");
-  });
 }
 
 function displayChecklists(option) {

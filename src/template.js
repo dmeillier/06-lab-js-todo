@@ -11,19 +11,12 @@ const checklistTemplate = (labelText) => `
   </div>
 </div>
 `;
-function getRandomInt(){
-  return Math.floor(Math.random() * 100);
-  }
-  console.log(getRandomInt());
   function createChecklist(labelText) {
     const checklist = document.createElement("div");
   
     checklist.classList.add("checklist");
     checklist.draggable = true;
-    if(checklist){
-      checklist.id = getRandomInt();
-    }
-   
+
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.setAttribute("aria-label", checkbox);
@@ -37,13 +30,6 @@ function getRandomInt(){
     modify.classList.add("stylo");
     modify.setAttribute("aria-label", "stylo");
 
-    // modify.addEventListener("click", () => {
-    //   const newLabelText = prompt("Entrez le nouveau label :");
-    //   if (newLabelText !== null && newLabelText.trim() !== "") {
-    //     label.textContent = newLabelText;
-    //     saveChecklistItemsToLocalStorage(getChecklistItems());
-    //   }
-    // });
     modify.addEventListener("click", () => {
       // Créer un champ d'édition pour modifier le label
       const editField = document.createElement("input");
@@ -80,7 +66,6 @@ function getRandomInt(){
     corbeilleButton.addEventListener("click", () => {
       checklist.remove();
       saveChecklistItemsToLocalStorage(getChecklistItems());
-      updateChecklistClasses();
     });
 
     checklist.appendChild(checkbox);
@@ -134,58 +119,23 @@ function getRandomInt(){
     localStorage.setItem("checklistItems", checklistItemsString);
   }
 
-  // Fonction pour mettre à jour les classes "pair" et "impair" des divs checklist
-  export function updateChecklistClasses() {
-    const checklistDivs = checklistContainer.querySelectorAll(".checklist");
-    checklistDivs.forEach((checklist, index) => {
-      if (index % 2 === 0) {
-        checklist.classList.remove("pair");
-        checklist.classList.add("impair");
-      } else {
-        checklist.classList.remove("impair");
-        checklist.classList.add("pair");
-      }
-    });
-  }
-
     export function addChecklist(labelText) {
     const checklist = createChecklist(labelText);
-    const index = document.querySelectorAll(".checklist").length;
-    if (index % 2 === 0) {
-      checklist.classList.add("pair");
-    } else {
-      checklist.classList.add("impair");
-    }
-
     const input = checklist.querySelector("input[type='checkbox']");
     const label = checklist.querySelector("label");
 
     // Gérer le clic sur le label pour cocher/décocher la case à cocher
     label.addEventListener("click", () => {
       input.checked = !input.checked;
-      handleChecklistClass(checklist);
       saveChecklistItemsToLocalStorage(getChecklistItems());
     });
 
     // Gérer le clic sur la case à cocher elle-même pour mettre à jour les classes
     input.addEventListener("click", () => {
-      handleChecklistClass(checklist);
       saveChecklistItemsToLocalStorage(getChecklistItems());
     });
 
     checklistContainer.appendChild(checklist);
-    updateChecklistClasses();
-  }
-
-  function handleChecklistClass(checklist) {
-    const index = Array.from(document.querySelectorAll(".checklist")).indexOf(checklist);
-    if (index % 2 === 0) {
-      checklist.classList.remove("pair");
-      checklist.classList.add("impair");
-    } else {
-      checklist.classList.remove("impair");
-      checklist.classList.add("pair");
-    }
   }
 
   export function getChecklistItems() {
@@ -227,7 +177,6 @@ function getRandomInt(){
       if (!labelExists) {
         addChecklist(searchText);
       }
-        updateChecklistClasses();
 
       input.value = ""; // Réinitialiser le champ d'entrée après avoir ajouté l'élément
       const checklistItems = getChecklistItems();

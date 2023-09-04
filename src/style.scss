@@ -31,15 +31,16 @@ header{
 .search{
   background-color: #fff;
   display: grid;
-  grid: 4.3125rem/ 10rem 37.5rem 4rem;
+  grid: 4.3125rem/ 10rem 37.5rem 60px;
   margin: 0 auto;
   button{
-    margin-top: 0.3125rem;
-    height: 60px;
+    margin-right: 20px;
+    margin-top: 16px;
+    height: 40px;
     border-radius: 2.5rem;
     background-color: #fff;
-    background-image: url(./medias/ajout.png);
-    background-size: 2.8125rem;
+    background-image: url(./medias/add.png);
+    background-size: 70px;
     background-repeat: no-repeat;
     background-position: center;
     border: 0;
@@ -199,56 +200,8 @@ header{
   grid-template-columns: 0.625rem 1fr 3.125rem;
   align-items: center;
   justify-content: center;
-
-  &.impair{
-    background-color: rgba(255, 122, 231, 0.50);
-  }
-}
-  .impair.input {
-    background-color: rgba(255, 122, 231, 0.10);
-  }
-  .pair input{
-    background-color: #fff;
-  }
-  
-  .pair label, .impair label {
-    color: #000;
-    font-size: 1.25rem;
-    position: relative;
-    cursor: pointer;
-    display: grid;
-    align-items: center;
-    width: fit-content;
-   text-align: left;
-    transition: color 0.3s ease;
-    margin:0 1.25rem 0 3.125rem;
-    padding-right: 20px;
-  }
-  
-  .pair label::before, .impair label::before, .pair label::after, .impair label::after {
-    content: "";
-    position: absolute;
-  }
-  
-  .pair label::before, .impair label::before {
-    height: 2px;
-    width: 8px;
-    left: -3.5625rem;
-    background: #cc29f0;
-    border-radius: 0.125rem;
-    transition: background 0.3s ease;
-  }
-  
-  .pair label::after, .impair label::after {
-    height: 4px;
-    width: 4px;
-    top: 0.5rem;
-    left: -1.5625rem;
-    border-radius: 50%;
-
-  }
-  
-  .pair input, .impair input {
+  input {
+    background-color: transparent;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -262,9 +215,47 @@ header{
     display: grid;
     align-items: center;
     margin-right: 1.25rem;
-   }
+  }
+  label {
+    color: #000;
+    font-size: 1.25rem;
+    position: relative;
+    cursor: pointer;
+    display: grid;
+    align-items: center;
+    width: fit-content;
+   text-align: left;
+    transition: color 0.3s ease;
+    margin:0 1.25rem 0 3.125rem;
+    padding-right: 20px;
+  }
+  label::before, label::after{
+    content: "";
+    position: absolute;
+  }
   
-   .pair input::before, .impair input::before, .pair input::after, .impair input::after {
+  label::before{
+    height: 2px;
+    width: 8px;
+    left: -3.5625rem;
+    background: #cc29f0;
+    border-radius: 0.125rem;
+    transition: background 0.3s ease;
+  }
+  label::after{
+    height: 4px;
+    width: 4px;
+    top: 0.5rem;
+    left: -1.5625rem;
+    border-radius: 50%;
+  }
+
+  &:nth-child(odd){
+    background-color: rgba(255, 122, 231, 0.50);
+    
+  }
+}
+   input::before, input::after {
     content: "";
     position: absolute;
     height: 2px;
@@ -273,35 +264,34 @@ header{
     border-radius: 0.125rem;
   }
   
-  .pair input::before,.impair input::before {
+  input::before{
     right: 60%;
     transform-origin: right bottom;
   }
-  
-  .pair input::after, .impair input::after {
+  input::after{
     left: 40%;
     transform-origin: left bottom;
   }
   
-    .pair input:checked::before, .impair input:checked::before {
+  input:checked::before{
     animation: check-01 0.4s ease forwards;
   }
   
-  .pair input:checked::after, .impair input:checked::after {
+ input:checked::after{
     animation: check-02 0.4s ease forwards;
   }
   
-    .pair input:checked + label, .impair input:checked + label {
+  input:checked + label {
     color: #000;
     animation: move 0.3s ease 0.1s forwards;
     }
   
-  .pair input:checked + label::before, .impair input:checked + label::before {
+  input:checked + label::before{
     background: #000;
     animation: slice 0.4s ease forwards;
   }
   
-  .pair input:checked + label::after, .impair input:checked + label::after {
+  input:checked + label::after{
     animation: firework 0.5s ease forwards 0.1s;
   }
   
@@ -435,35 +425,29 @@ button#delete{
  .night #app {
     background-color: #1d1b1b;
   }
-  .night .radio-inputs{
+  .night .radio-inputs, .night .checklist label::before, .night input::before, .night input::after{
     background-color: #fff;
   }
-  .night .pair label::before, .night .impair label::before{
+  .night input::before, .night input::after {
     background: #fff;
   }
-  .night .pair input::before, 
-  .night .pair input::after, .night .impair input::before, 
-  .night .impair input::after {
-    background: #fff;
-  }
-  .night .checklist.pair {
+  .night .checklist:nth-child(even) {
     background: rgba(255, 122, 231, 0.50);
+    input {
+      background: rgba(255, 122, 231, 0);
+    }
   }
-  .night .checklist.pair input {
-    background: rgba(255, 122, 231, 0);
-  }
-  
-  .night .checklist.impair{
+  .night .checklist:nth-child(odd){
     background: #2C265D
   }
-  .night .pair label, .night .impair label{
+  .night .checklist label{
     color: #fff
   }
-  .night .pair input:checked + label, .night .impair input:checked + label {
+  .night label::before{
     color: #fff;
   }
-  .night .pair input:checked + label::before, .night .impair input:checked + label::before {
-    background: #fff;
+  .night input:checked + label, .night input:checked + label::before{
+    color: #fff;
   }
   .night .stylo{
     background-image: url(./medias/styloblc.svg);
@@ -475,7 +459,6 @@ button#delete{
     height: 20px;
     background-size: 1.25rem;
   }
-  
 }
 
 @media (prefers-color-scheme : light ) {
@@ -488,31 +471,25 @@ button#delete{
    .night .radio-inputs{
      background-color: #fff;
    }
-   .night .pair label::before, .night .impair label::before{
+   .night label::before{
      background: #fff;
    }
-   .night .pair input::before, 
-   .night .pair input::after, .night .impair input::before, 
-   .night .impair input::after {
+   .night input::before, .night input::after{
      background: #fff;
    }
-   .night .checklist.pair {
+   .night .checklist.checklist:nth-child(even) {
      background: rgba(255, 122, 231, 0.50);
    }
-   .night .checklist.pair input {
-     background: rgba(255, 122, 231, 0);
-   }
-   
-   .night .checklist.impair{
+     .night .checklist.checklist:nth-child(odd){
      background: #2C265D
    }
-   .night .pair label, .night .impair label{
+   .night label{
      color: #fff
    }
-   .night .pair input:checked + label, .night .impair input:checked + label {
+   .night input:checked + label {
      color: #fff;
    }
-   .night .pair input:checked + label::before, .night .impair input:checked + label::before {
+   .night input:checked + label::before {
      background: #fff;
    }
    .night .stylo{
@@ -525,33 +502,31 @@ button#delete{
      height: 20px;
      background-size: 1.25rem;
    }
-   .night .impair button.corbeille{
-     background-color: #2C265D;
-   }
-   .night .pair button.corbeille{
-     background-color: rgba(255, 122, 231, 0);
-   }
- }
+}
 
 
 //   ................... Responsive ....................
 @media screen and (max-width: 375px){
   header, header.night{
     height: 100px;
-    padding-left: 1.25rem;
+    padding-left: 15px;
     max-width: 100%;
   }
   .search {
     grid: 2.625rem/ 1.875rem 11.25rem 2.875rem;
-    margin: 0 1.875rem 0 1.25rem;
+	  margin: 0 20px;
   }
-  .search_button{
-    height: 30px;
-  }
+  // .search_button{
+  //   height: 30px;
+  // }
   button.search_button{
     margin-top: 5px;
-    background-size: 2rem;
-    height : 2rem;
+    background-size: 55px;
+    height : 32px;
+    margin-right: 5px;
+  }
+  .box{
+    padding-left: 10px;
   }
   
   #app{
@@ -563,7 +538,7 @@ button#delete{
     background: transparent;
   }
   
-  .checklist.pair, .checklist.impair {
+  .checklist {
     width: 312px;
   }
   .radio-inputs {
@@ -591,10 +566,10 @@ button#delete{
     .radio-inputs {
       margin-bottom: 0;
     }
-    .checklist.pair{
+    .checklist.checklist:nth-child(even){
       background-color: #fff;
     }
-    .checklist.pair, .checklist.impair {
+    .checklist {
       margin-bottom: 2.0625rem;
     }
     button#delete{
@@ -609,7 +584,7 @@ button#delete{
     padding-left: 1.25rem;
      }
   .search {
-    grid: 42px/ 1.875rem 11.25rem 2.625rem;
+    grid: 42px/ 2rem 11.25rem 2.625rem;
     margin-right: 1.25rem;
     margin-left: 1.25rem;
     }
@@ -626,7 +601,7 @@ button#delete{
     .night #app{
       background: transparent;
     }
-    .checklist.pair, .checklist.impair {
+    .checklist {
       width: 312px;
     }
     .radio-inputs {
@@ -663,10 +638,10 @@ button#delete{
     padding-left: 0;
     padding-right: 1.25rem;
   }
-    // .search{
-    //   grid: 4.3125rem/ 3.875rem 25rem 4.125rem;
-
-    // }
+    .search{
+      grid: 4.3125rem/ 5rem 41.5rem 5rem;
+     margin-right: 10px;
+    }
   }
 
 @media only screen and (min-width: 2560px){
