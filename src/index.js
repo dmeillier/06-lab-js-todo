@@ -1,14 +1,15 @@
-import "./style.scss"
-import "./header.js"
-import "./dark-mode.js"
-import "./boutons.js"
-import "./template.js"
-import "./drag&drop.js"
-import "./move-checklists.js"
-import {getChecklistItems} from "./template.js"
+import "./style.scss";
+import "./header.js";
+import "./boutons.js";
+import "./dark-mode.js";
 
+import "./template.js";
+import "./drag&drop.js";
+import  {checklists, setCheckLists} from "./header";
+import {getChecklistItems} from "./template.js"
+import "./move-checklists";
 const deleteButton = document.getElementById("delete");
-const checklists = document.querySelectorAll(".checklist"); 
+setCheckLists(document.querySelectorAll(".checklist"));
 const containers = document.querySelectorAll(".container"); 
 
      // Supprimer une checklist
@@ -32,10 +33,12 @@ const containers = document.querySelectorAll(".container");
     })
 
 // Gérer le déplacement de la checklist
-function moveChecklist(checklist, dropTarget) {
+
+export function moveChecklist(checklist, dropTarget) {
   const container = dropTarget ? dropTarget.parentElement : document.getElementById("app");
   const dropTargetIndex = dropTarget ? Array.from(container.children).indexOf(dropTarget) : 0;
   const draggedElementIndex = Array.from(container.children).indexOf(checklist);
+
 
   if (draggedElementIndex < dropTargetIndex) {
     if (dropTarget.nextSibling) {
@@ -48,6 +51,7 @@ function moveChecklist(checklist, dropTarget) {
   }
 }
 
+
 // Gérer le clic sur le bouton corbeille pour supprimer une checklist
 function handleDeleteButtonClick(event) {
   const checklist = event.target.closest(".checklist");
@@ -57,17 +61,17 @@ function handleDeleteButtonClick(event) {
 }
 
 // Gérer le début du glisser-déposer
-function handleDragStart(event) {
+export function handleDragStart(event) {
   event.dataTransfer.setData('text/plain', event.target.id);
 }
 
 // Gérer le survol pendant le glisser-déposer
-function handleDragOver(event) {
+export function handleDragOver(event) {
   event.preventDefault();
 }
 
 // Gérer le dépôt lors du lâcher de l'élément
-function handleDrop(event) {
+export function handleDrop(event) {
   event.preventDefault();
   const checklistId = event.dataTransfer.getData('text/plain');
   const draggedChecklist = document.getElementById(checklistId);
@@ -87,23 +91,9 @@ containers.forEach(container => {
   container.addEventListener("dragover", handleDragOver);
   container.addEventListener("drop", handleDrop);
 });
-function saveChecklistItemsToLocalStorage() {
-  const checklistStates = [];
 
-  checklists.forEach(checklist => {
-    const input = checklist.querySelector("input")
-    if (input) {
-                  
-      const state = {
-        id: checklist.id,
-        checked: input.checked
-      };
-      checklistStates.push(state);
-    }
-  });
 
-  localStorage.setItem("checklistStates", JSON.stringify(checklistStates));
-}
+
   // Ajouter des gestionnaires d'événements pour la suppression, le déplacement et le drag and drop des checklists
   const deleteButtons = document.querySelectorAll(".corbeille");
   deleteButtons.forEach(button => {

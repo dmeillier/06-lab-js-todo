@@ -1,3 +1,4 @@
+import  {checklists, setCheckLists} from "./header";
 
 const input = document.querySelector("input.search_input");
 
@@ -16,6 +17,7 @@ const checklistTemplate = (labelText) => `
   
     checklist.classList.add("checklist");
     checklist.draggable = true;
+
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
@@ -114,10 +116,32 @@ const checklistTemplate = (labelText) => `
   }
 
   // Fonction pour sauvegarder les données dans le localStorage
-  export function saveChecklistItemsToLocalStorage(checklistItems) {
-    const checklistItemsString = JSON.stringify(checklistItems);
-    localStorage.setItem("checklistItems", checklistItemsString);
-  }
+  //saveChecklistItemsToLocalStorage
+  //export function saveChecklistItemsToLocalStorage(checklistItems) {
+    //console.log(checklistItems)
+    //const checklistItemsString = JSON.stringify(checklistItems);
+   // localStorage.setItem("checklistItems", checklistItemsString);
+  //}
+
+  function saveChecklistItemsToLocalStorage() {
+    const checklistStates = [];
+  
+    checklists.forEach(checklist => {
+      const input = checklist.querySelector("input");
+      if (input) {                  
+        const state = {
+          id: checklist.id,
+          checked: input.checked,
+          labelText: checklist.querySelector("label").textContent.trim()
+        };
+        checklistStates.push(state);
+        
+      }
+    });
+
+     
+  localStorage.setItem("checklistStates", JSON.stringify(checklistStates));
+}
 
     export function addChecklist(labelText) {
     const checklist = createChecklist(labelText);
@@ -127,15 +151,17 @@ const checklistTemplate = (labelText) => `
     // Gérer le clic sur le label pour cocher/décocher la case à cocher
     label.addEventListener("click", () => {
       input.checked = !input.checked;
-      saveChecklistItemsToLocalStorage(getChecklistItems());
+      saveChecklistItemsToLocalStorage();
     });
 
     // Gérer le clic sur la case à cocher elle-même pour mettre à jour les classes
     input.addEventListener("click", () => {
-      saveChecklistItemsToLocalStorage(getChecklistItems());
+      
+      saveChecklistItemsToLocalStorage();
     });
 
     checklistContainer.appendChild(checklist);
+    
   }
 
   export function getChecklistItems() {
@@ -160,7 +186,7 @@ const checklistTemplate = (labelText) => `
   const button = document.querySelector("button.search_button");
 
   // Écouter l'événement 'click' sur le bouton pour ajouter un nouvel élément de liste
-  button.addEventListener("click", () => {
+  button.addEventListener("click", function() {
     const searchText = input.value.trim().toLowerCase();
     if (searchText !== "") {
       const labels = document.querySelectorAll("div.checklist > label");
@@ -176,14 +202,15 @@ const checklistTemplate = (labelText) => `
 
       if (!labelExists) {
         addChecklist(searchText);
+        setCheckLists(document.querySelectorAll(".checklist"));
       }
 
       input.value = ""; // Réinitialiser le champ d'entrée après avoir ajouté l'élément
       const checklistItems = getChecklistItems();
       saveChecklistItemsToLocalStorage(checklistItems);
     }
-    const checklists = document.querySelectorAll(".checklist");
-  checklists.forEach(checklist => {
-    checklist.style.display = "grid";
-  })
+  
+    checklists.forEach(checklist => {
+      checklist.style.display = "grid";   
+    })
   });

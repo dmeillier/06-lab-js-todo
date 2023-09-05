@@ -1,3 +1,5 @@
+
+
 const main = document.createElement('main');
 const app = document.querySelector("#app");
 
@@ -42,7 +44,7 @@ const customRadioHolder = document.getElementById("radioContainer");
 // Ajoutez "divradio" contenant les boutons radio
 app.prepend(divradio);
 
-const checklist = document.querySelectorAll(".checklist");
+// setCheckLists(document.querySelectorAll(".checklist"));
 
   const deleteButton = document.createElement("button");
   deleteButton.setAttribute("id", "delete");

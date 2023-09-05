@@ -1,4 +1,11 @@
-const header = document.createElement('header');
+//import  {checklists, setCheckLists} from "./move-checklists.js";
+export let checklists = document.querySelectorAll(".checklist");
+
+export function setCheckLists(listChecklist){
+  checklists = listChecklist;
+}
+
+export const header = document.createElement('header');
 const box = document.createElement("div");
 box.setAttribute("class", "box");
 
@@ -34,17 +41,17 @@ button.addEventListener("click", () => {
 });
 
 // Écouter l'événement 'input' sur l'élément input
-input.addEventListener("input", () => {
-  const searchText = input.value.toLowerCase(); 
+// input.addEventListener("input", () => {
+//   const searchText = input.value.toLowerCase(); 
   
-  // Parcourir toutes les checklists pour les filtrer
-  const checklists = document.querySelectorAll(".checklist");
-  checklists.forEach(checklist => {
-    const checklistText = checklist.textContent.toLowerCase();
-    if (checklistText.includes(searchText)) {
-      checklist.style.display = "grid"; 
-    } else {
-      checklist.style.display = "none"; 
-    }
-  });
-});
+//   // Parcourir toutes les checklists pour les filtrer
+//   setCheckLists(document.querySelectorAll(".checklist"));
+//   checklists.forEach(checklist => {
+//     const checklistText = checklist.textContent.toLowerCase();
+//     if (checklistText.includes(searchText)) {
+//       checklist.style.display = "grid"; 
+//     } else {
+//       checklist.style.display = "none"; 
+//     }
+//   });
+// });

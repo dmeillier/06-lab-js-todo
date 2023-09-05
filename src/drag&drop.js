@@ -1,8 +1,10 @@
-import {updateChecklistClasses} from "./template.js"
-let draggedElement = null; // 
+import {updateChecklistClasses} from "./template.js";
+import  {checklists, setCheckLists} from "./header.js";
+
+let draggedElement = null; 
 
 document.addEventListener("mousedown", function(e)  {
-    const checklists = document.querySelectorAll(".checklist");
+  setCheckLists(document.querySelectorAll(".checklist"));
 
     // Ajouter un ID unique à chaque checklist
   checklists.forEach((checklist, index) => {
@@ -15,14 +17,9 @@ document.addEventListener("mousedown", function(e)  {
     containers.forEach((container) => {
       container.addEventListener("dragover", (e) => e.preventDefault());
       container.addEventListener("drop", handleDrop);
-      //dragStart(evt);
+     
     });
   
-
-  //   function dragStart(evt){
-  //     evt.dataTransfer.setData('text/plain', evt.target.id);
-  // }
-
     checklists.forEach((checklist) => {
       checklist.addEventListener("dragstart", (e) => {
         const checklistId = e.target.getAttribute("data-checklist-id");

@@ -1,12 +1,25 @@
+import { checklists, setCheckLists } from "./header";
 const deleteButton = document.getElementById("delete");
 const customRadioHolder = document.getElementById("radioContainer");
-const checklists = document.querySelectorAll(".checklist");
 
-function updateChecklistClasses() {
-  const visibleChecklists = Array.from(document.querySelectorAll('.checklist[style*="grid"]'));
-}
+  export function updateChecklistClasses() {
+     checklists.forEach((checklist, index) => {
+      if (checklist.style.display === 'grid') {
+      checklist.classList.remove("even");
+      checklist.classList.remove("odd");
+      if (index % 2 === 0) {
+        checklist.classList.add('even');
+      //  checklist.classList.remove('odd');
+      } else {
+        checklist.classList.add('odd');
+      //  checklist.classList.remove('even');
+      }
+    }
+    });
+  }
 
-function displayChecklists(option) {
+
+export function displayChecklists(option) {
   checklists.forEach(checklist => {
     const input = checklist.querySelector("input[type='checkbox']");
     const isChecked = input.checked;
@@ -20,12 +33,12 @@ function displayChecklists(option) {
     } else {
       checklist.style.display = 'none';
     }
-
-    updateChecklistClasses();
   });
-
+  
+  updateChecklistClasses();
   deleteButton.style.display = option === "Tâches achevées" ? "block" : "none";
 }
+
 
 checklists.forEach(checklist => {
   const input = checklist.querySelector("input[type='checkbox']");
@@ -36,6 +49,7 @@ const isCompletedOption = document.getElementById("finish");
     if (isActiveOption.checked) {
       if (input.checked) {
         checklist.style.display = "none";
+
       } 
        else {
         checklist.style.display = "grid";
@@ -50,7 +64,9 @@ const isCompletedOption = document.getElementById("finish");
     } else {
       checklist.style.display = "grid";
     }
-updateChecklistClasses(checklist);
+
+
+updateChecklistClasses();
     const updateEvent = new Event("updateDisplay");
     document.dispatchEvent(updateEvent);
   });

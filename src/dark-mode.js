@@ -1,5 +1,5 @@
-import "./boutons.js";
-const header = document.querySelector("header");
+import {header} from "./header";
+
 const main = document.querySelector("main");
 
 // Créez les éléments HTML en JavaScript
