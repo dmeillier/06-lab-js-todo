@@ -257,7 +257,7 @@ main {
   left: -1.5625rem;
   border-radius: 50%;
 }
-.checklist:not([style="display= none;"]):nth-child(2n+1) {
+.checklist.rose {
   background-color: rgba(255, 122, 231, 0.5);
 }
 
@@ -421,13 +421,13 @@ button#delete {
   .night input::before, .night input::after {
     background: #fff;
   }
-  .night .checklist:nth-child(even) {
+  .night .checklist.rose {
     background: rgba(255, 122, 231, 0.5);
   }
-  .night .checklist:nth-child(even) input {
+  .night .checklist.rose input {
     background: rgba(255, 122, 231, 0);
   }
-  .night .checklist:nth-child(odd) {
+  .night .checklist.blanc {
     background: #2C265D;
   }
   .night .checklist label {
@@ -466,10 +466,10 @@ button#delete {
   .night input::before, .night input::after {
     background: #fff;
   }
-  .night .checklist.checklist:nth-child(even) {
+  .night .checklist.checklist.rose {
     background: rgba(255, 122, 231, 0.5);
   }
-  .night .checklist.checklist:nth-child(odd) {
+  .night .checklist.checklist.blanc {
     background: #2C265D;
   }
   .night label {
@@ -548,7 +548,7 @@ button#delete {
   .radio-inputs {
     margin-bottom: 0;
   }
-  .checklist.checklist:nth-child(even) {
+  .checklist.blanc {
     background-color: #fff;
   }
   .checklist {

@@ -1,5 +1,4 @@
 import  {checklists, setCheckLists} from "./header";
-
 const input = document.querySelector("input.search_input");
 
   // Template pour la checklist
@@ -18,10 +17,10 @@ const checklistTemplate = (labelText) => `
     checklist.classList.add("checklist");
     checklist.draggable = true;
 
-
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.setAttribute("aria-label", checkbox);
+
     
     const label = document.createElement("label");
     label.textContent = labelText;
@@ -35,6 +34,7 @@ const checklistTemplate = (labelText) => `
     modify.addEventListener("click", () => {
       // Créer un champ d'édition pour modifier le label
       const editField = document.createElement("input");
+      editField.style.border = "2px outset grey";
       editField.type = "text";
       editField.value = label.textContent;
       editField.style.width = "100%";
@@ -108,25 +108,26 @@ const checklistTemplate = (labelText) => `
   
   export function getChecklistItemsFromLocalStorage() {
     const checklistItemsString = localStorage.getItem("checklistItems");
-    if (checklistItemsString) {
+     if (checklistItemsString) {
       return JSON.parse(checklistItemsString);
     } else {
       return [];
     }
-  }
-
-  // Fonction pour sauvegarder les données dans le localStorage
-  //saveChecklistItemsToLocalStorage
-  //export function saveChecklistItemsToLocalStorage(checklistItems) {
-    //console.log(checklistItems)
-    //const checklistItemsString = JSON.stringify(checklistItems);
-   // localStorage.setItem("checklistItems", checklistItemsString);
-  //}
+   }
+   export function getChecklistStatesFromLocalStorage() {
+   const checklistStatesString = localStorage.getItem("checklistStates");
+   if (checklistStatesString) {
+     return JSON.parse(checklistStatesString);
+   } else {
+     return [];
+   }
+   }
+ 
 
   function saveChecklistItemsToLocalStorage() {
     const checklistStates = [];
   
-    checklists.forEach(checklist => {
+    checklists.forEach((checklist) => {
       const input = checklist.querySelector("input");
       if (input) {                  
         const state = {
@@ -138,30 +139,34 @@ const checklistTemplate = (labelText) => `
         
       }
     });
-
-     
   localStorage.setItem("checklistStates", JSON.stringify(checklistStates));
 }
 
-    export function addChecklist(labelText) {
+    export function addChecklist(labelText, index) {
+   
+    const statesStorage = getChecklistStatesFromLocalStorage();
     const checklist = createChecklist(labelText);
     const input = checklist.querySelector("input[type='checkbox']");
     const label = checklist.querySelector("label");
-
+    if(statesStorage[index].checked==true){
+      input.checked = true;
+    }
     // Gérer le clic sur le label pour cocher/décocher la case à cocher
     label.addEventListener("click", () => {
-      input.checked = !input.checked;
+      
       saveChecklistItemsToLocalStorage();
     });
 
     // Gérer le clic sur la case à cocher elle-même pour mettre à jour les classes
     input.addEventListener("click", () => {
-      
       saveChecklistItemsToLocalStorage();
     });
-
+    if(index%2===0) {
+      checklist.classList.add("rose");
+    } else {
+      checklist.classList.add("blanc");
+    }
     checklistContainer.appendChild(checklist);
-    
   }
 
   export function getChecklistItems() {
@@ -175,8 +180,8 @@ const checklistTemplate = (labelText) => `
 
   // Charger les éléments de la liste depuis le localStorage lors du chargement de la page
   const checklistItems = getChecklistItemsFromLocalStorage();
-  checklistItems.forEach((item) => {
-    addChecklist(item);
+  checklistItems.forEach((item, index) => {
+    addChecklist(item, index);
   });
 
   // Ajouter la div container checklistContainer à l'élément ayant l'id "app"
