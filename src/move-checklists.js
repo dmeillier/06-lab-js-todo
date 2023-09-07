@@ -75,6 +75,7 @@ checklists.forEach((checklist, index) => {
 
     // Mettez à jour le localStorage avec l'état actuel de la checklist
     if (localStorageChecklistStates && localStorageChecklistStates[index]) {
+      
       localStorageChecklistStates[index].checked = input.checked;
       localStorage.setItem("checklistStates", JSON.stringify(localStorageChecklistStates));
     }

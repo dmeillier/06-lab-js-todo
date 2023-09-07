@@ -6,7 +6,7 @@ import "./dark-mode.js";
 import "./template.js";
 import "./drag&drop.js";
 import  {checklists, setCheckLists} from "./header";
-import {getChecklistItems} from "./template.js"
+import {getChecklistStates, saveChecklistStatesToLocalStorage} from "./template.js"
 import "./move-checklists";
 const deleteButton = document.getElementById("delete");
 setCheckLists(document.querySelectorAll(".checklist"));
@@ -92,13 +92,11 @@ containers.forEach(container => {
   container.addEventListener("drop", handleDrop);
 });
 
-
-
   // Ajouter des gestionnaires d'événements pour la suppression, le déplacement et le drag and drop des checklists
-  const deleteButtons = document.querySelectorAll(".corbeille");
-  deleteButtons.forEach(button => {
-    button.addEventListener("click", handleDeleteButtonClick);
-  });
+  // const deleteButtons = document.querySelectorAll(".corbeille");
+  // deleteButtons.forEach(button => {
+  //   button.addEventListener("click", handleDeleteButtonClick);
+  // });
 
   checklists.forEach(checklist => {
   checklist.ondragstart = handleDragStart;

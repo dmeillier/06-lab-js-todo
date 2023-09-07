@@ -1,4 +1,4 @@
-import {updateChecklistClasses} from "./template.js";
+import {updateChecklistClasses} from "./move-checklists.js";
 import  {checklists, setCheckLists} from "./header.js";
 
 let draggedElement = null; 
@@ -53,6 +53,24 @@ document.addEventListener("mousedown", function(e)  {
       );
     
       draggedElement = null;
+     // Mettez à jour les classes des checklists après le déplacement
+    updateChecklistClasses();
+
+    // Réinitialisez les couleurs après le déplacement
+    resetChecklistColors();
     }
-  //  updateChecklistClasses();
-  })
+   // Fonction pour réinitialiser les couleurs
+  function resetChecklistColors() {
+    const checklists = document.querySelectorAll(".checklist");
+    checklists.forEach((checklist, index) => {
+      checklist.classList.remove("rose", "blanc");
+      if (index % 2 === 0) {
+        checklist.classList.add("rose");
+      } else {
+        checklist.classList.add("blanc");
+      }
+    });
+  }
+
+  resetChecklistColors(); // Appelez-le également lors du chargement initial de la page
+});
