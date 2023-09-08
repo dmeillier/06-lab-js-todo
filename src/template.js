@@ -118,14 +118,14 @@ const searchInput = document.querySelector("input.search_input");
      resetChecklistColors(event);
    });
    
-   export function getChecklistItemsFromLocalStorage() {
-    const checklistItemsString = localStorage.getItem("checklistItems");
-     if (checklistItemsString) {
-      return JSON.parse(checklistItemsString);
-    } else {
-      return [];
-    }
-   }
+  //  export function getChecklistItemsFromLocalStorage() {
+  //   const checklistItemsString = localStorage.getItem("checklistItems");
+  //    if (checklistItemsString) {
+  //     return JSON.parse(checklistItemsString);
+  //   } else {
+  //     return [];
+  //   }
+  //  }
 
    export function getChecklistStatesFromLocalStorage() {
       const checklistStatesString = localStorage.getItem("checklistStates");    
@@ -182,8 +182,9 @@ const searchInput = document.querySelector("input.search_input");
       addChecklist(searchText);
       displayChecklists();
       const inputSearch = document.querySelector('.search_input'); 
-      this.style.display = 'none';
+      this.hidden = true;
       inputSearch.value = "";
+      saveChecklistStatesToLocalStorage();
     }
   });
 
@@ -204,7 +205,7 @@ const searchInput = document.querySelector("input.search_input");
   label.addEventListener("click", () => {
     input.checked = !input.checked;
     getChecklistStates();
-    saveChecklistStatesToLocalStorage();4
+    saveChecklistStatesToLocalStorage();
     displayChecklists();
   });
   

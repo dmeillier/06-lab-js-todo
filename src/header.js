@@ -1,3 +1,4 @@
+//import { saveChecklistStatesToLocalStorage } from "./template";
 
 export let checklists = document.querySelectorAll(".checklist");
 
@@ -37,7 +38,7 @@ header.appendChild(div);
 
 
 input.addEventListener("keyup", function() {
-  
+  console.log("keyup event triggered");
   //Activation de l'affichage de toutes les tâches
   const option = document.querySelector("#allTasks");
   const buttonDeleteAllTasks = document.querySelector("#delete");
@@ -62,7 +63,7 @@ input.addEventListener("keyup", function() {
     } else {
       checklists[index].classList.add("blanc");
     }
-
+    
 
   });
 
