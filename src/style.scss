@@ -45,6 +45,7 @@ header{
     background-position: center;
     border: 0;
     transition: transform 2s;
+    cursor: pointer;
     }
     button:hover{
       transform: rotate(360deg);
@@ -61,7 +62,7 @@ header{
     @include width_height();
     position: absolute;
     opacity: 0;
-    cursor: pointer;
+    
   }
   
   .toggle-slot {
@@ -72,6 +73,7 @@ header{
     border-radius: 10em;
     background-color: white;
     transition: background-color 250ms;
+    cursor: pointer;
   }
   
   .toggle-checkbox:checked ~ .toggle-slot {
@@ -395,7 +397,8 @@ header{
   background-size: 18px;
   width: 25px;
   height: 20px;
-  border: none
+  border: none;
+  cursor: pointer;
 }
 
 .corbeille{
@@ -406,6 +409,7 @@ header{
   width: 25px;
   height: 20px;
   border: none;
+  cursor: pointer;
 }
 
 

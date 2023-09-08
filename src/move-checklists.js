@@ -24,15 +24,17 @@ export function updateChecklistClasses() {
   });
 }
 
-  export function displayChecklists(option) {
+  export function displayChecklists() {
+  const option = document.querySelector("#allTasks:checked, #actived:checked, #finish:checked");
   checklists.forEach(checklist => {
     const input = checklist.querySelector("input[type='checkbox']");
     const isChecked = input.checked;
-
+    
+    
     if (
-      (option === "Toutes les tâches") ||
-      (option === "Tâches actives" && !isChecked) ||
-      (option === "Tâches achevées" && isChecked)
+      (option.value === "Toutes les tâches") ||
+      (option.value === "Tâches actives" && !isChecked) ||
+      (option.value === "Tâches achevées" && isChecked)
       
     ) {
       checklist.style.display = 'grid';
@@ -42,7 +44,7 @@ export function updateChecklistClasses() {
    
   });
   updateChecklistClasses();
-  deleteButton.style.display = option === "Tâches achevées" ? "block" : "none";
+  deleteButton.style.display = option.value === "Tâches achevées" ? "block" : "none";
 
 
 checklists.forEach((checklist, index) => {
@@ -88,12 +90,12 @@ checklists.forEach((checklist, index) => {
 }
 customRadioHolder.addEventListener("change", (event) => {
   const selectedOption = event.target.value;
-  displayChecklists(selectedOption);
+  displayChecklists();
 });
 
 const initialOption = customRadioHolder.querySelector('.radio:checked');
 if (initialOption) {
-  displayChecklists(initialOption.value);
+  displayChecklists();
   updateChecklistClasses();
 }
 

@@ -1,4 +1,7 @@
 import  {checklists, setCheckLists} from "./header";
+import {resetChecklistColors } from "./drag&drop";
+import { displayChecklists } from "./move-checklists";
+
 const searchInput = document.querySelector("input.search_input");
 
  // Template pour la checklist
@@ -11,6 +14,13 @@ const searchInput = document.querySelector("input.search_input");
    </div>
  </div>
  `;
+
+
+
+
+
+
+
    function createChecklist(labelText,) {
      const checklist = document.createElement("div");
    
@@ -49,14 +59,14 @@ const searchInput = document.querySelector("input.search_input");
        // Gérer la sauvegarde du label modifié
        editField.addEventListener("blur", () => {
          label.textContent = editField.value;
-         saveChecklistStatesToLocalStorage(getChecklistItems());
+         saveChecklistStatesToLocalStorage(getChecklistStates());
        });
      
        // Appuyer sur la touche "Entrée" pour enregistrer les modifications
        editField.addEventListener("keyup", (event) => {
          if (event.key === "Enter") {
            label.textContent = editField.value;
-           saveChecklistStatesToLocalStorage(getChecklistItems());
+           saveChecklistStatesToLocalStorage(getChecklistStates());
          }
        });
      });
@@ -68,6 +78,7 @@ const searchInput = document.querySelector("input.search_input");
      corbeilleButton.addEventListener("click", () => {      
       checklist.remove();     
       saveChecklistStatesToLocalStorage();
+      resetChecklistColors();
      });
  
      checklist.appendChild(checkbox);
@@ -104,6 +115,7 @@ const searchInput = document.querySelector("input.search_input");
        // Réinitialisez les styles
        draggingElement.classList.remove("dragging");
      }
+     resetChecklistColors(event);
    });
    
    export function getChecklistItemsFromLocalStorage() {
@@ -127,11 +139,9 @@ const searchInput = document.querySelector("input.search_input");
    export function saveChecklistStatesToLocalStorage() {
     const checklistStates= [];
     const updateChecklists = getChecklistStates(); 
-    console.log(updateChecklists)   ;
     updateChecklists.forEach((checklist) => {
       
        const input = checklist.querySelector("input[type='checkbox']");
-       //console.log(input);
        if (input) {                  
          const state = {
            id: checklist.id,
@@ -167,73 +177,77 @@ const searchInput = document.querySelector("input.search_input");
  
    // Écouter l'événement 'click' sur le bouton pour ajouter un nouvel élément de liste
    button.addEventListener("click", function() {
-     const searchText = searchInput.value.trim().toLowerCase();
-     if (searchText !== "") {
-       const labels = document.querySelectorAll("div.checklist > label");
-       let labelExists = false;
- 
-       labels.forEach((label) => {
-         const labelText = label.textContent.trim().toLowerCase();
- 
-         if (searchText === labelText) {
-           labelExists = true;
-         }
-       });
- 
-       if (!labelExists) {
-         addChecklist(searchText);
-         setCheckLists(document.querySelectorAll(".checklist"));
-       }
- 
-       searchInput.value = ""; // Réinitialiser le champ d'entrée après avoir ajouté l'élément
-       getChecklistStates();
-       console.log(checklists);
-       saveChecklistStatesToLocalStorage();
-     }
-   
-     checklists.forEach(checklist => {
-       checklist.style.display = "grid";   
-     })
-   });
+    const searchText = searchInput.value.trim().toLowerCase();
+    if (searchText !== "") {
+      addChecklist(searchText);
+      displayChecklists();
+      const inputSearch = document.querySelector('.search_input'); 
+      this.style.display = 'none';
+      inputSearch.value = "";
+    }
+  });
 
 
   export function addChecklist(labelText, index) {
-  
   const statesStorage = getChecklistStatesFromLocalStorage();
-  
   const checklist = createChecklist(labelText);
   const input = checklist.querySelector("input[type='checkbox']");
   const label = checklist.querySelector("label");
-
-  if (statesStorage[index].checked ) {
-    input.checked = true;  
+   
+  if( index ){
+    if (statesStorage[index].checked ) {
+      input.checked = true;  
+    }
   }
-
+  
   // Gérer le clic sur le label pour cocher/décocher la case à cocher
   label.addEventListener("click", () => {
     input.checked = !input.checked;
-    getChecklistItems();
-  saveChecklistStatesToLocalStorage();
+    getChecklistStates();
+    saveChecklistStatesToLocalStorage();4
+    displayChecklists();
   });
   
   // Gérer le clic sur la case à cocher elle-même pour mettre à jour les classes
   input.addEventListener("click", () => {
+    getChecklistStates();
     saveChecklistStatesToLocalStorage();
+    displayChecklists();
   });
+
+ 
+ 
     
-  if (index % 2 === 0) {
-    checklist.classList.add("rose");
-  } else {
-    checklist.classList.add("blanc");
+  if( index >= 0 ){
+    
+    if (index % 2 === 0) {
+      checklist.classList.add("rose");
+    } else {
+      checklist.classList.add("blanc");
+    }
+    
+  }else{
+
+    if( statesStorage.length === 0 ){
+      checklist.classList.add("rose");      
+    }else if((statesStorage.length + 1) % 2 !== 0 ){
+      checklist.classList.add("rose");
+    }
+  }
+
+
+  if( document.getElementById("finish").checked ) {
+    document.getElementById("finish").checked = false;
+    document.getElementById("allTasks").checked = true
   }
 
   checklistContainer.appendChild(checklist);
-  //saveChecklistStatesToLocalStorage();
+
 }
 
 // Charger les éléments de la liste depuis le localStorage lors du chargement de la page
 const checklistStates = getChecklistStatesFromLocalStorage();
 
-checklistStates.forEach((item, index) => {  
+checklistStates.forEach((item, index) => {   
   addChecklist(item.labelText, index);
 });

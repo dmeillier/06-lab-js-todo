@@ -15,7 +15,7 @@ const containers = document.querySelectorAll(".container");
      // Supprimer une checklist
     function deleteChecklist(checklist) {
       checklist.remove();
-      saveChecklistItemsToLocalStorage(getChecklistItems());
+      saveChecklistStatesToLocalStorage(getChecklistStates());
     }
 
     deleteButton.addEventListener("click", () => {

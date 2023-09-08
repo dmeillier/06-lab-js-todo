@@ -9,9 +9,10 @@ main.appendChild(app);
 const divradio = document.createElement("div");
 divradio.id = "radioContainer";
 divradio.className = "radio-inputs";
-const options = ["Toutes les tâches", "Tâches actives", "Tâches achevées"];
+export const options = ["Toutes les tâches", "Tâches actives", "Tâches achevées"];
 const ids = ["allTasks", "actived", "finish"]
 // Boucle à travers les options pour créer les boutons radio et les étiquettes
+
 for (let i = 0; i < options.length; i++) {
     // Créez l'élément label
     const label = document.createElement("label");

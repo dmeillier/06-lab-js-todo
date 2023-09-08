@@ -1,4 +1,4 @@
-//import  {checklists, setCheckLists} from "./move-checklists.js";
+
 export let checklists = document.querySelectorAll(".checklist");
 
 export function setCheckLists(listChecklist){
@@ -24,6 +24,7 @@ let button = document.createElement("button");
 button.setAttribute("class", "search_button");
 button.setAttribute("type", "button");
 button.setAttribute("aria-label", "ajouter une tâche");
+button.hidden = true;
 
 // Ajout des éléments dans le div
 div.appendChild(box);
@@ -34,24 +35,40 @@ div.appendChild(button);
 document.body.append(header);
 header.appendChild(div);
 
-// Ajoutez un événement 'click' au bouton pour le notifier lorsque le bouton est cliqué
-button.addEventListener("click", () => {
-  const event = new CustomEvent("customButtonClick");
-  document.dispatchEvent(event);
-});
 
-// Écouter l'événement 'input' sur l'élément input
-// input.addEventListener("input", () => {
-//   const searchText = input.value.toLowerCase(); 
+input.addEventListener("keyup", function() {
   
-//   // Parcourir toutes les checklists pour les filtrer
-//   setCheckLists(document.querySelectorAll(".checklist"));
-//   checklists.forEach(checklist => {
-//     const checklistText = checklist.textContent.toLowerCase();
-//     if (checklistText.includes(searchText)) {
-//       checklist.style.display = "grid"; 
-//     } else {
-//       checklist.style.display = "none"; 
-//     }
-//   });
-// });
+  //Activation de l'affichage de toutes les tâches
+  const option = document.querySelector("#allTasks");
+  const buttonDeleteAllTasks = document.querySelector("#delete");
+  option.checked = true;
+  buttonDeleteAllTasks.style.display = 'none';
+
+  const checklists = document.querySelectorAll(".checklist");
+  const checklistStates = JSON.parse(localStorage.getItem("checklistStates"));    
+  const regex = new RegExp(`^${input.value}`);
+  let numberFindWords = 0;
+  checklistStates.forEach( (checklistState, index) => {
+    if( regex.test(checklistState.labelText)){
+      checklists[index].classList.remove("rose", "blanc");
+      checklists[index].style.display = "grid";
+      numberFindWords++;
+    }else{
+      checklists[index].style.display = "none";
+    }
+
+    if (numberFindWords - 1 % 2 === 0) {
+      checklists[index].classList.add("rose");
+    } else {
+      checklists[index].classList.add("blanc");
+    }
+
+
+  });
+
+  if( numberFindWords === 0 ) {
+    console.log(numberFindWords);
+    button.hidden = false;    
+  }
+  
+});

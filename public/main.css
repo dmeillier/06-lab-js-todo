@@ -43,6 +43,7 @@ header {
   background-position: center;
   border: 0;
   transition: transform 2s;
+  cursor: pointer;
 }
 .search button:hover {
   transform: rotate(360deg);
@@ -59,7 +60,6 @@ header {
   height: 35px;
   position: absolute;
   opacity: 0;
-  cursor: pointer;
 }
 
 .toggle-slot {
@@ -70,6 +70,7 @@ header {
   border-radius: 10em;
   background-color: white;
   transition: background-color 250ms;
+  cursor: pointer;
 }
 
 .toggle-checkbox:checked ~ .toggle-slot {
@@ -387,6 +388,7 @@ input:checked + label::after {
   width: 25px;
   height: 20px;
   border: none;
+  cursor: pointer;
 }
 
 .corbeille {
@@ -397,6 +399,7 @@ input:checked + label::after {
   width: 25px;
   height: 20px;
   border: none;
+  cursor: pointer;
 }
 
 button#delete {
